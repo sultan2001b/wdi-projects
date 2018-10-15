@@ -1,6 +1,6 @@
 $('document').ready(function () {
     // console.log('test');
-    var lastEnter = "O";
+    var lastEnter = "O"
     var x = [];
     var o = [];
     var avilablePlaces = [];
@@ -11,43 +11,63 @@ $('document').ready(function () {
 
 
     $('.box').on('click', function () {
-        if ($(this).find("h1").text() == 'O' || $(this).find("h1").text() == 'X') {
+        if ($(this).find("h1").text() != '') {
             return;
         }
-        if(x.length===0&&o.length===0)
-        gameDone = false;
-        if (lastEnter === 'O') {
-            $(this).find("h1").text('X');
+        if (x.length === 0 && o.length === 0) {
+            gameDone = false;
+        }
+        if (lastEnter === "O") {
+            $(this).find("h1").text('X')
             x.push($(this)[0].id[3] + "" + $(this)[0].id[4]);
-            lastEnter = 'X';
-            checkIfWinCodeBlock()
-            if (gameType === 1) {
-                computerPlay(checkIfWinCodeBlock);
-                lastEnter = 'O';
-                return;
+            lastEnter = "X";
+            if (checkIfWin(x)) {
+                xCounter++;
+                showMessage('x Win`s, game will restarted');
+                $('#xWins').text(xCounter);
+                gameDone = true;
+                if (gameType === 1) {
+                    lastEnter = "O"
+                }
+            }
+            else {
+                if (gameType === 1) {
+                    fillAvilablePlaces();
+                    var randNum = Math.floor(Math.random() * (avilablePlaces.length));
+                    if (isGameFull() || gameDone) {
+                        return;
+                    }
+                    $('#' + avilablePlaces[randNum]).find('h1').text("O")
+                    o.push('' + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]);
+                    if (checkIfWin(o)) {
+                        // debugger;
+                        oCounter++;
+                        showMessage('o Win`s, game will restarted');
+                        $('#oWins').text(oCounter);
+                    }
+                    lastEnter = "O"
+                }
             }
         }
         else {
-            $(this).find("h1").text('O');
+            $(this).find("h1").text('O')
             o.push($(this)[0].id[3] + "" + $(this)[0].id[4]);
-            lastEnter = 'O';
-            checkIfWinCodeBlock()
+            lastEnter = "O"
+            if (checkIfWin(o)) {
+                oCounter++;
+                showMessage('o Win`s, game will restarted');
+                $('#oWins').text(oCounter);
+            }
+        }
+        if(isGameFull() )
+        {
+            showMessage('no one win, game will restarted')
         }
     })
 
-function checkIfWinCodeBlock()
-{
-    if(!checkIfWin(x)&&!checkIfWin(o))
-    if (isGameEnded() === true) {
-        showMessage('the game is ended, will restarted');
+    function cl(text) {
+        console.log(text);
     }
-}
-
-function cl(text)
-{
-console.log(text);
-}
-
     function showMessage(text) {
         window.setTimeout(function () {
             alert(text);
@@ -87,7 +107,6 @@ console.log(text);
         if (countery1 === 3 || countery2 === 3 || countery3 === 3) {
             win = true;
         }
-        // debugger;
         var counterCrosslr = 0;
         var counterCrossrl = 0;
         for (var a of input) {
@@ -99,28 +118,11 @@ console.log(text);
         if (counterCrosslr === 3 || counterCrossrl === 3) {
             win = true;
         }
-        if (win === true) {
-            if (input === x) {
-                xCounter++;
-                showMessage('x Win`s, game will restarted');
-                lastEnter = "O";
 
-            }
-            else {
-                oCounter++;
-                showMessage('o Win`s, game will restarted');
-                lastEnter = "X";
-
-            }
-            // debugger;   
-            $('#xWins').text(xCounter);
-            $('#oWins').text(oCounter);
-            gameDone = true;
-        }
         return win;
     }
 
-    function isGameEnded() {
+    function isGameFull() {
 
         for (var i of $('.box>h1')) {
             if ($(i).text() === '') {
@@ -135,8 +137,6 @@ console.log(text);
         }
         x = [];
         o = [];
-        
-
     }
     $('input#one').on('click', function () {
         gameType = 1;
@@ -144,28 +144,14 @@ console.log(text);
     $('input#two').on('click', function () {
         gameType = 2;
     })
-    function computerPlay(fn) {
-        fillAvilablePlaces();
-        var randNum = Math.floor(Math.random() * (avilablePlaces.length));
-        window.setTimeout(function () {
-            if (isGameEnded() || gameDone){
-                return;
-            }
-            $('#' + avilablePlaces[randNum]).find('h1').text("O");
-            o.push(''+avilablePlaces[randNum][3]+avilablePlaces[randNum][4]);
-            // debugger;
-            fn();
-        }, 200)
-    }
+
     function fillAvilablePlaces() {
         avilablePlaces = [];
         for (var i of $('.box')) {
-            // debugger;
             if ($(i).find('h1').text() == "") {
                 avilablePlaces.push("" + $(i).attr('id'));
             }
         }
-        // debugger;
     }
 
 
