@@ -60,7 +60,6 @@ $('document').ready(function () {
                 $('#oWins').text(oCounter);
             }
         }
-        debugger;
         if(isGameFull() && !gameDone)
         {
             showMessage('no one win, game will restarted')
