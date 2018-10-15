@@ -14,9 +14,11 @@ $('document').ready(function () {
         if ($(this).find("h1").text() != '') {
             return;
         }
-        if (x.length === 0 && o.length === 0) {
+// debugger;
+
+        // if (x.length === 0 && o.length === 0) {
             gameDone = false;
-        }
+        // }
         if (lastEnter === "O") {
             $(this).find("h1").text('X')
             x.push($(this)[0].id[3] + "" + $(this)[0].id[4]);
@@ -35,17 +37,20 @@ $('document').ready(function () {
                     fillAvilablePlaces();
                     var randNum = Math.floor(Math.random() * (avilablePlaces.length));
                     if (isGameFull() || gameDone) {
-                        return;
+                        // return;
                     }
-                    $('#' + avilablePlaces[randNum]).find('h1').text("O")
-                    o.push('' + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]);
-                    if (checkIfWin(o)) {
-                        gameDone=true;
-                        oCounter++;
-                        showMessage('o Win`s, game will restarted');
-                        $('#oWins').text(oCounter);
+                    else
+                    {
+                        $('#' + avilablePlaces[randNum]).find('h1').text("O")
+                        o.push('' + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]);
+                        if (checkIfWin(o)) {
+                            gameDone=true;
+                            oCounter++;
+                            showMessage('o Win`s, game will restarted');
+                            $('#oWins').text(oCounter);
+                        }
+                        lastEnter = "O"
                     }
-                    lastEnter = "O"
                 }
             }
         }
