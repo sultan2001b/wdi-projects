@@ -40,7 +40,7 @@ $('document').ready(function () {
                     $('#' + avilablePlaces[randNum]).find('h1').text("O")
                     o.push('' + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]);
                     if (checkIfWin(o)) {
-                        // debugger;
+                        gameDone=true;
                         oCounter++;
                         showMessage('o Win`s, game will restarted');
                         $('#oWins').text(oCounter);
@@ -54,12 +54,14 @@ $('document').ready(function () {
             o.push($(this)[0].id[3] + "" + $(this)[0].id[4]);
             lastEnter = "O"
             if (checkIfWin(o)) {
+                gameDone=true;
                 oCounter++;
                 showMessage('o Win`s, game will restarted');
                 $('#oWins').text(oCounter);
             }
         }
-        if(isGameFull() )
+        debugger;
+        if(isGameFull() && !gameDone)
         {
             showMessage('no one win, game will restarted')
         }
@@ -72,7 +74,7 @@ $('document').ready(function () {
         window.setTimeout(function () {
             alert(text);
             restartGame();
-        }, 200)
+        }, 50)
     }
 
     function checkIfWin(input) {
