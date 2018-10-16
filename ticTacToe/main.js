@@ -65,8 +65,7 @@ $("document").ready(function() {
     }
     if (isGameFull() && !gameDone) {
       showMessage("no one win, game will restarted");
-      if(gameType===1)
-      {
+      if (gameType === 1) {
         lastEnter = "O";
       }
     }
@@ -79,8 +78,12 @@ $("document").ready(function() {
     } else {
       // debugger;
       if (!playSmartFor("O")) {
-        if (!playSmartFor("X")) {
-          playRandom();
+        if (!playSuperSmartFor("O")) {
+          if (!playSmartFor("X")) {
+            if (!playSuperSmartFor("X")) {
+              playRandom();
+            }
+          }
         }
       }
     }
@@ -196,6 +199,110 @@ $("document").ready(function() {
     }
     return false;
   }
+
+  function playSuperSmartFor(xORo) {
+    for (var a of $(".box h1")) {
+      if ($(a).text() === xORo) {
+        // debugger;
+        var id = parseInt(
+          $(a)
+            .parent()
+            .attr("id")
+            .substring(3)
+        );
+        var newidInside = id + 1;
+        if (getBoxH1(id + 2).text() === xORo) {
+          if (
+            getBoxH1(newidInside).text() === "" &&
+            getBoxH1(newidInside).length !== 0
+          ) {
+            getBoxH1(newidInside).text("O");
+            o.push("" + newidInside);
+            return true;
+          }
+        }
+        newidInside = id - 1;
+        if (getBoxH1(id - 2).text() === xORo) {
+          if (
+            getBoxH1(newidInside).text() === "" &&
+            getBoxH1(newidInside).length !== 0
+          ) {
+            getBoxH1(newidInside).text("O");
+            o.push("" + newidInside);
+            return true;
+          }
+        }
+        newidInside = id + 10;
+        if ($("#box" + (id + 20) + " h1").text() === xORo) {
+          if (
+            getBoxH1(newidInside).text() === "" &&
+            getBoxH1(newidInside).length !== 0
+          ) {
+            getBoxH1(newidInside).text("O");
+            o.push("" + newidInside);
+            return true;
+          }
+        }
+        newidInside = id - 10;
+        if ($("#box" + (id - 20) + " h1").text() === xORo) {
+          if (
+            getBoxH1(newidInside).text() === "" &&
+            getBoxH1(newidInside).length !== 0
+          ) {
+            getBoxH1(newidInside).text("O");
+            o.push("" + newidInside);
+            return true;
+          }
+        }
+        newidInside = id + 11;
+        if ($("#box" + (id + 22) + " h1").text() === xORo) {
+          if (
+            getBoxH1(newidInside).text() === "" &&
+            getBoxH1(newidInside).length !== 0
+          ) {
+            getBoxH1(newidInside).text("O");
+            o.push("" + newidInside);
+            return true;
+          }
+        }
+        newidInside = id - 11;
+        if ($("#box" + (id - 22) + " h1").text() === xORo) {
+          if (
+            getBoxH1(newidInside).text() === "" &&
+            getBoxH1(newidInside).length !== 0
+          ) {
+            getBoxH1(newidInside).text("O");
+            o.push("" + newidInside);
+            return true;
+          }
+        }
+        newidInside = id + 9;
+        if ($("#box" + (id + 18) + " h1").text() === xORo) {
+          if (
+            getBoxH1(newidInside).text() === "" &&
+            getBoxH1(newidInside).length !== 0
+          ) {
+            getBoxH1(newidInside).text("O");
+            o.push("" + newidInside);
+            return true;
+          }
+        }
+        newidInside = id - 9;
+        if ($("#box" + (id - 18) + " h1").text() === xORo) {
+          if (
+            getBoxH1(newidInside).text() === "" &&
+            getBoxH1(newidInside).length !== 0
+          ) {
+            getBoxH1(newidInside).text("O");
+            o.push("" + newidInside);
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   function playRandom() {
     fillAvilablePlaces();
     var randNum = Math.floor(Math.random() * avilablePlaces.length);
