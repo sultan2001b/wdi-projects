@@ -310,12 +310,13 @@ $("document").ready(function() {
       o.push("" + id);
       return true;
     }
-    var newId = id + num;
+     newId = id + num;
     if ($("#box" + newId + " h1").length != 0 && $("#box" + newId + " h1").text() === "X") {
       $("#box" + id + " h1").text("O");
       o.push("" + id);
       return true;
     }
+    return false;
   }
 
   function playRandom() {
@@ -327,7 +328,7 @@ $("document").ready(function() {
       var arr=[1,10,9,11];
       for(var a of arr)
       {
-       if(partOfPlayRandom(id,a));
+       if(partOfPlayRandom(id,a))
        return true;
       }
     }
