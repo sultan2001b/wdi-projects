@@ -303,26 +303,48 @@ $("document").ready(function() {
     return false;
   }
 
+  function partOfPlayRandom(id,num) {
+    var newId = id - num;
+    if ($("#box" + newId + " h1").length != 0 && $("#box" + newId + " h1").text() === "X") {
+      $("#box" + id + " h1").text("O");
+      o.push("" + id);
+      return true;
+    }
+    var newId = id + num;
+    if ($("#box" + newId + " h1").length != 0 && $("#box" + newId + " h1").text() === "X") {
+      $("#box" + id + " h1").text("O");
+      o.push("" + id);
+      return true;
+    }
+  }
+
   function playRandom() {
     fillAvilablePlaces();
+    for (var i of avilablePlaces) {
+      var id = parseInt(
+        i.substring(3)
+      );
+      var arr=[1,10,9,11];
+      for(var a of arr)
+      {
+       if(partOfPlayRandom(id,a));
+       return true;
+      }
+    }
     var randNum = Math.floor(Math.random() * avilablePlaces.length);
     $("#" + avilablePlaces[randNum])
       .find("h1")
       .text("O");
     o.push("" + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]);
   }
-  // function computerPlay()
-  // {
-  //     fillAvilablePlaces();
-  //     var randNum = Math.floor(Math.random() * avilablePlaces.length);
-  //     $("#" + avilablePlaces[randNum])
-  //         .find("h1")
-  //         .text("O");
-  //     o.push(
-  //         "" + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]
-  //     );
+  // function playRandom() {
+  //   fillAvilablePlaces();
+  //   var randNum = Math.floor(Math.random() * avilablePlaces.length);
+  //   $("#" + avilablePlaces[randNum])
+  //     .find("h1")
+  //     .text("O");
+  //   o.push("" + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]);
   // }
-
   function cl(text) {
     console.log(text);
   }
