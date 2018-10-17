@@ -71,6 +71,45 @@ $("document").ready(function() {
     }
   });
 
+  function partOfPlay4For(id, Num, xORo) {
+    newidInside = id + Num;
+    if (
+      getBoxH1(newidInside).text() === "" &&
+      getBoxH1(newidInside).length !== 0
+    ) {
+      getBoxH1(newidInside).text("O");
+      o.push("" + newidInside);
+      return true;
+    }
+    newidInside = id - Num;
+      if (
+        getBoxH1(newidInside).text() === "" &&
+        getBoxH1(newidInside).length !== 0
+      ) {
+        getBoxH1(newidInside).text("O");
+        o.push("" + newidInside);
+        return true;
+      }
+    return false;
+  }
+  function play4For(xORo) {
+    for (var a of $(".box h1")) {
+      if ($(a).text() === xORo) {
+        // debugger;
+        var id = parseInt(
+          $(a)
+            .parent()
+            .attr("id")
+            .substring(3)
+        );
+        var arr2 = [2, 20, 22, 18];
+        for (var aa of arr2) {
+          if (partOfPlay4For(id, aa, xORo)) return true;
+        }
+      }
+    }
+    return false;
+  }
   function computerPlay() {
     if ($("#box22 h1").text() === "") {
       $("#box22 h1").text("O");
@@ -81,7 +120,9 @@ $("document").ready(function() {
         if (!playSuperSmartFor("O")) {
           if (!playSmartFor("X")) {
             if (!playSuperSmartFor("X")) {
-              playRandom();
+              if (!play4For("X")) {
+                playRandom();
+              }
             }
           }
         }
@@ -96,6 +137,31 @@ $("document").ready(function() {
     return $("#box" + id + " h1");
   }
 
+  function partOfPlaySmartFor(id, Num, xORo) {
+    var newidInside = id + Num * 2;
+    if (getBoxH1(id + Num).text() === xORo) {
+      if (
+        getBoxH1(newidInside).text() === "" &&
+        getBoxH1(newidInside).length !== 0
+      ) {
+        getBoxH1(newidInside).text("O");
+        o.push("" + newidInside);
+        return true;
+      }
+    }
+    newidInside = id - Num * 2;
+    if (getBoxH1(id - Num).text() === xORo) {
+      if (
+        getBoxH1(newidInside).text() === "" &&
+        getBoxH1(newidInside).length !== 0
+      ) {
+        getBoxH1(newidInside).text("O");
+        o.push("" + newidInside);
+        return true;
+      }
+    }
+    return false;
+  }
   function playSmartFor(xORo) {
     for (var a of $(".box h1")) {
       if ($(a).text() === xORo) {
@@ -106,95 +172,37 @@ $("document").ready(function() {
             .attr("id")
             .substring(3)
         );
-        var noneElement = getBoxH1(55);
-        var newidInside = id + 2;
-        if (getBoxH1(id + 1).text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
+
+        var arr3 = [1, 10, 11, 9];
+        for (var aa of arr3) {
+          if (partOfPlaySmartFor(id, aa, xORo)) return true;
         }
-        newidInside = id - 2;
-        if (getBoxH1(id - 1).text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id + 20;
-        if ($("#box" + (id + 10) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id - 20;
-        if ($("#box" + (id - 10) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id + 22;
-        if ($("#box" + (id + 11) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id - 22;
-        if ($("#box" + (id - 11) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id + 18;
-        if ($("#box" + (id + 9) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id - 18;
-        if ($("#box" + (id - 9) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
+      }
+    }
+    return false;
+  }
+
+  function partOfPlaySuperSmartFor(id, Num, xORo) {
+    newidInside = id + Num;
+    if (getBoxH1(id + Num * 2).text() === xORo) {
+      if (
+        getBoxH1(newidInside).text() === "" &&
+        getBoxH1(newidInside).length !== 0
+      ) {
+        getBoxH1(newidInside).text("O");
+        o.push("" + newidInside);
+        return true;
+      }
+    }
+    newidInside = id - Num;
+    if (getBoxH1(id - Num * 2).text() === xORo) {
+      if (
+        getBoxH1(newidInside).text() === "" &&
+        getBoxH1(newidInside).length !== 0
+      ) {
+        getBoxH1(newidInside).text("O");
+        o.push("" + newidInside);
+        return true;
       }
     }
     return false;
@@ -210,109 +218,25 @@ $("document").ready(function() {
             .attr("id")
             .substring(3)
         );
-        var newidInside = id + 1;
-        if (getBoxH1(id + 2).text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id - 1;
-        if (getBoxH1(id - 2).text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id + 10;
-        if ($("#box" + (id + 20) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id - 10;
-        if ($("#box" + (id - 20) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id + 11;
-        if ($("#box" + (id + 22) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id - 11;
-        if ($("#box" + (id - 22) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id + 9;
-        if ($("#box" + (id + 18) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
-        }
-        newidInside = id - 9;
-        if ($("#box" + (id - 18) + " h1").text() === xORo) {
-          if (
-            getBoxH1(newidInside).text() === "" &&
-            getBoxH1(newidInside).length !== 0
-          ) {
-            getBoxH1(newidInside).text("O");
-            o.push("" + newidInside);
-            return true;
-          }
+        var arr2 = [1, 10, 11, 9];
+        for (var aa of arr2) {
+          if (partOfPlaySuperSmartFor(id, aa, xORo)) return true;
         }
       }
     }
     return false;
   }
 
-  function partOfPlayRandom(id,num) {
+  function partOfPlayRandom(id, num) {
     var newId = id - num;
-    if ($("#box" + newId + " h1").length != 0 && $("#box" + newId + " h1").text() === "X") {
-      $("#box" + id + " h1").text("O");
+    if (getBoxH1(newId).length != 0 && getBoxH1(newId).text() === "X") {
+      getBoxH1(id).text("O");
       o.push("" + id);
       return true;
     }
-     newId = id + num;
-    if ($("#box" + newId + " h1").length != 0 && $("#box" + newId + " h1").text() === "X") {
-      $("#box" + id + " h1").text("O");
+    newId = id + num;
+    if (getBoxH1(newId).length != 0 && getBoxH1(newId).text() === "X") {
+      getBoxH1(id).text("O");
       o.push("" + id);
       return true;
     }
@@ -322,14 +246,10 @@ $("document").ready(function() {
   function playRandom() {
     fillAvilablePlaces();
     for (var i of avilablePlaces) {
-      var id = parseInt(
-        i.substring(3)
-      );
-      var arr=[1,10,9,11];
-      for(var a of arr)
-      {
-       if(partOfPlayRandom(id,a))
-       return true;
+      var id = parseInt(i.substring(3));
+      var arr = [1, 10, 9, 11];
+      for (var a of arr) {
+        if (partOfPlayRandom(id, a)) return true;
       }
     }
     var randNum = Math.floor(Math.random() * avilablePlaces.length);
