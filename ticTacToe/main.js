@@ -110,11 +110,9 @@ $("document").ready(function() {
     }
     return false;
   }
-  function play5SemiRandom()
-  {
+  function play5SemiRandom() {
     var startPlay = [11, 13, 31, 33];
-    for (var g of startPlay)
-    {
+    for (var g of startPlay) {
       var randNum = g;
       if ($("#box" + randNum + " h1").text() === "") {
         $("#box" + randNum + " h1").text("O");
@@ -126,42 +124,46 @@ $("document").ready(function() {
   }
   function computerPlay() {
     var randNum = 22; //startPlay[Math.round(Math.random() * 3)];
-    if (o.length===0) {
-      if (getBoxH1(11).text()==='X') {
-        getBoxH1(33).text('O');
-        o.push(''+33);
+    if (o.length === 0) {
+      // if (getBoxH1(11).text()==='X') {
+      //   getBoxH1(33).text('O');
+      //   o.push(''+33);
 
-      } else if (getBoxH1(33).text() === 'X') {
-        getBoxH1(11).text('O');
-        o.push("" + 11);
+      // } else if (getBoxH1(33).text() === 'X') {
+      //   getBoxH1(11).text('O');
+      //   o.push("" + 11);
 
-      } else if(getBoxH1(13).text() === 'X') {
-        getBoxH1(31).text('O');
-        o.push('' + 31);
+      // } else if(getBoxH1(13).text() === 'X') {
+      //   getBoxH1(31).text('O');
+      //   o.push('' + 31);
 
-      } else if(getBoxH1(31).text() === 'X') {
-        getBoxH1(13).text('O');
-        o.push('' + 13);
-      } else
-      {
+      // } else if(getBoxH1(31).text() === 'X') {
+      //   getBoxH1(13).text('O');
+      //   o.push('' + 13);
+      // }
+      if (getBoxH1(22).text() === "") {
+        getBoxH1(22).text("O");
+        o.push("" + 22);
+      } else {
         play5SemiRandom();
       }
-    } 
+    }
     // var randNum = 22; //startPlay[Math.round(Math.random() * 3)];
     // if ($("#box" + randNum + " h1").text() === "") {
     //   $("#box" + randNum + " h1").text("O");
     //   o.push("" + randNum);
-    // } 
+    // }
     else {
       // debugger;
       if (!playSmartFor("O")) {
         if (!playSuperSmartFor("O")) {
           if (!playSmartFor("X")) {
             if (!playSuperSmartFor("X")) {
-              if (!play4For("X")) {
-                if (!play5SemiRandom())
-                {
-                  playRandom();
+              if (!playForSecondPlay()) {
+                if (!play4For("X")) {
+                  if (!play5SemiRandom()) {
+                    playRandom();
+                  }
                 }
               }
             }
@@ -169,6 +171,62 @@ $("document").ready(function() {
         }
       }
     }
+  }
+
+  function playForSecondPlay() {
+    if (
+      o.length === 1 &&
+      getBoxH1(22).text() === "O" &&
+      (getBoxH1(11).text() === "X" ||
+        getBoxH1(31).text() === "X" ||
+        getBoxH1(33).text() === "X" ||
+        getBoxH1(13).text() === "X")
+    ) {
+      if (getBoxH1(12).text() === "") {
+        getBoxH1(12).text("O");
+        o.push("" + 12);
+        return true;
+      } else if (getBoxH1(21).text() === "") {
+        getBoxH1(21).text("O");
+        o.push("" + 21);
+        return true;
+      } else if (getBoxH1(32).text() === "") {
+        getBoxH1(32).text("O");
+        o.push("" + 32);
+        return true;
+      } else if (getBoxH1(23).text() === "") {
+        getBoxH1(23).text("O");
+        o.push("" + 23);
+        return true;
+      }
+    }
+    else{
+      if (o.length === 1 ){
+        if (partPlayForSecondPlay(32, 23)) {
+          getBoxH1(33).text('O');
+          o.push('' + 33);
+          return true;
+        } else if (partPlayForSecondPlay(23, 12)) {
+          getBoxH1(13).text('O');
+          o.push('' + 13);
+          return true;
+        } else if (partPlayForSecondPlay(12, 21)) {
+          getBoxH1(11).text('O');
+          o.push('' + 11);
+          return true;
+        } else if (partPlayForSecondPlay(21, 32)) {
+          getBoxH1(31).text('O');
+          o.push('' + 31);
+          return true;
+        } 
+      }
+    }
+    return false;
+  }
+  function partPlayForSecondPlay(num1,num2)
+  {
+    if(getBoxH1Text(num1)==='X'&&getBoxH1Text(num2)==='X')
+    return true;
   }
   function getBoxH1Text(id) {
     return $("#box" + id + " h1").text();
@@ -284,7 +342,6 @@ $("document").ready(function() {
     return false;
   }
 
-  
   function playRandom() {
     fillAvilablePlaces();
     for (var i of avilablePlaces) {
