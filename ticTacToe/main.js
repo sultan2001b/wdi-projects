@@ -182,19 +182,20 @@ $("document").ready(function() {
         getBoxH1(33).text() === "X" ||
         getBoxH1(13).text() === "X")
     ) {
-      if (getBoxH1(12).text() === "") {
+      
+      if (getBoxH1(12).text() === "" && getBoxH1(32).text() !== "X") {
         getBoxH1(12).text("O");
         o.push("" + 12);
         return true;
-      } else if (getBoxH1(21).text() === "") {
+      } else if (getBoxH1(21).text() === "" && getBoxH1(23).text() !== "X") {
         getBoxH1(21).text("O");
         o.push("" + 21);
         return true;
-      } else if (getBoxH1(32).text() === "") {
+      } else if (getBoxH1(32).text() === "" && getBoxH1(12).text() !== "X") {
         getBoxH1(32).text("O");
         o.push("" + 32);
         return true;
-      } else if (getBoxH1(23).text() === "") {
+      } else if (getBoxH1(23).text() === "" && getBoxH1(21).text() !== "X") {
         getBoxH1(23).text("O");
         o.push("" + 23);
         return true;
