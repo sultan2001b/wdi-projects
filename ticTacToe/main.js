@@ -82,14 +82,14 @@ $("document").ready(function() {
       return true;
     }
     newidInside = id - Num;
-      if (
-        getBoxH1(newidInside).text() === "" &&
-        getBoxH1(newidInside).length !== 0
-      ) {
-        getBoxH1(newidInside).text("O");
-        o.push("" + newidInside);
-        return true;
-      }
+    if (
+      getBoxH1(newidInside).text() === "" &&
+      getBoxH1(newidInside).length !== 0
+    ) {
+      getBoxH1(newidInside).text("O");
+      o.push("" + newidInside);
+      return true;
+    }
     return false;
   }
   function play4For(xORo) {
@@ -110,18 +110,59 @@ $("document").ready(function() {
     }
     return false;
   }
+  function play5SemiRandom()
+  {
+    var startPlay = [11, 13, 31, 33];
+    for (var g of startPlay)
+    {
+      var randNum = g;
+      if ($("#box" + randNum + " h1").text() === "") {
+        $("#box" + randNum + " h1").text("O");
+        o.push("" + randNum);
+        return true;
+      }
+    }
+    return false;
+  }
   function computerPlay() {
-    if ($("#box22 h1").text() === "") {
-      $("#box22 h1").text("O");
-      o.push("22");
-    } else {
+    var randNum = 22; //startPlay[Math.round(Math.random() * 3)];
+    if (o.length===0) {
+      if (getBoxH1(11).text()==='X') {
+        getBoxH1(33).text('O');
+        o.push(''+33);
+
+      } else if (getBoxH1(33).text() === 'X') {
+        getBoxH1(11).text('O');
+        o.push("" + 11);
+
+      } else if(getBoxH1(13).text() === 'X') {
+        getBoxH1(31).text('O');
+        o.push('' + 31);
+
+      } else if(getBoxH1(31).text() === 'X') {
+        getBoxH1(13).text('O');
+        o.push('' + 13);
+      } else
+      {
+        play5SemiRandom();
+      }
+    } 
+    // var randNum = 22; //startPlay[Math.round(Math.random() * 3)];
+    // if ($("#box" + randNum + " h1").text() === "") {
+    //   $("#box" + randNum + " h1").text("O");
+    //   o.push("" + randNum);
+    // } 
+    else {
       // debugger;
       if (!playSmartFor("O")) {
         if (!playSuperSmartFor("O")) {
           if (!playSmartFor("X")) {
             if (!playSuperSmartFor("X")) {
               if (!play4For("X")) {
-                playRandom();
+                if (!play5SemiRandom())
+                {
+                  playRandom();
+                }
               }
             }
           }
@@ -243,6 +284,7 @@ $("document").ready(function() {
     return false;
   }
 
+  
   function playRandom() {
     fillAvilablePlaces();
     for (var i of avilablePlaces) {
@@ -258,14 +300,7 @@ $("document").ready(function() {
       .text("O");
     o.push("" + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]);
   }
-  // function playRandom() {
-  //   fillAvilablePlaces();
-  //   var randNum = Math.floor(Math.random() * avilablePlaces.length);
-  //   $("#" + avilablePlaces[randNum])
-  //     .find("h1")
-  //     .text("O");
-  //   o.push("" + avilablePlaces[randNum][3] + avilablePlaces[randNum][4]);
-  // }
+
   function cl(text) {
     console.log(text);
   }
