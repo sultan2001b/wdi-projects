@@ -30,7 +30,7 @@ $("document").ready(function() {
       lastEnter = "X";
       if (checkIfWin(x)) {
         xCounter++;
-        showMessage("x Win`s, game will restarted");
+        showMessage("Good job!","x Win`s, game will restarted", "success");
         $("#xWins").text(xCounter);
         gameDone = true;
         if (gameType === 1) {
@@ -43,7 +43,7 @@ $("document").ready(function() {
             if (checkIfWin(o)) {
               gameDone = true;
               oCounter++;
-              showMessage("o Win`s, game will restarted");
+              showMessage("oops!!", "o Win`s, game will restarted", "error");
               $("#oWins").text(oCounter);
             }
             lastEnter = "O";
@@ -59,12 +59,12 @@ $("document").ready(function() {
       if (checkIfWin(o)) {
         gameDone = true;
         oCounter++;
-        showMessage("o Win`s, game will restarted");
+        showMessage("Good job!","o Win`s, game will restarted", "success");
         $("#oWins").text(oCounter);
       }
     }
     if (isGameFull() && !gameDone) {
-      showMessage("no one win, game will restarted");
+      showMessage("Try Agin", "no one win, game will restarted",'info');
       if (gameType === 1) {
         lastEnter = "O";
       }
@@ -125,22 +125,6 @@ $("document").ready(function() {
   function computerPlay() {
     var randNum = 22; //startPlay[Math.round(Math.random() * 3)];
     if (o.length === 0) {
-      // if (getBoxH1(11).text()==='X') {
-      //   getBoxH1(33).text('O');
-      //   o.push(''+33);
-
-      // } else if (getBoxH1(33).text() === 'X') {
-      //   getBoxH1(11).text('O');
-      //   o.push("" + 11);
-
-      // } else if(getBoxH1(13).text() === 'X') {
-      //   getBoxH1(31).text('O');
-      //   o.push('' + 31);
-
-      // } else if(getBoxH1(31).text() === 'X') {
-      //   getBoxH1(13).text('O');
-      //   o.push('' + 13);
-      // }
       if (getBoxH1(22).text() === "") {
         getBoxH1(22).text("O");
         o.push("" + 22);
@@ -148,11 +132,6 @@ $("document").ready(function() {
         play5SemiRandom();
       }
     }
-    // var randNum = 22; //startPlay[Math.round(Math.random() * 3)];
-    // if ($("#box" + randNum + " h1").text() === "") {
-    //   $("#box" + randNum + " h1").text("O");
-    //   o.push("" + randNum);
-    // }
     else {
       // debugger;
       if (!playSmartFor("O")) {
@@ -195,7 +174,7 @@ $("document").ready(function() {
         getBoxH1(32).text("O");
         o.push("" + 32);
         return true;
-      } else if (getBoxH1(23).text() === "" && getBoxH1(21).text() !== "X") {
+      } else if (getBoxH1(23).text() === "" && getBoxH1(32).text() !== "X") {
         getBoxH1(23).text("O");
         o.push("" + 23);
         return true;
@@ -326,7 +305,89 @@ $("document").ready(function() {
     }
     return false;
   }
-
+// function needToBeRemoved()
+// {
+//   function playSuperSmartFor(xORo) {
+//     for (var a of $(".box h1")) {
+//       if ($(a).text() === xORo) {
+//         // debugger;
+//         var id = parseInt($(a)
+//             .parent()
+//             .attr("id")
+//             .substring(3));
+        
+//           newidInside = id + 1;
+//           if (getBoxH1(id + 1 * 2).text() === xORo) {
+//             if (getBoxH1(newidInside).text() === "" && getBoxH1(newidInside).length !== 0) {
+//               getBoxH1(newidInside).text("O");
+//               o.push("" + newidInside);
+//               return true;
+//             }
+//           }
+//           newidInside = id - 1;
+//           if (getBoxH1(id - 1 * 2).text() === xORo) {
+//             if (getBoxH1(newidInside).text() === "" && getBoxH1(newidInside).length !== 0) {
+//               getBoxH1(newidInside).text("O");
+//               o.push("" + newidInside);
+//               return true;
+//             }
+//           }
+//           newidInside = id + 10;
+//           if (getBoxH1(id + 10 * 2).text() === xORo) {
+//             if (getBoxH1(newidInside).text() === "" && getBoxH1(newidInside).length !== 0) {
+//               getBoxH1(newidInside).text("O");
+//               o.push("" + newidInside);
+//               return true;
+//             }
+//           }
+//           newidInside = id - 10;
+//           if (getBoxH1(id - 10 * 2).text() === xORo) {
+//             if (getBoxH1(newidInside).text() === "" && getBoxH1(newidInside).length !== 0) {
+//               getBoxH1(newidInside).text("O");
+//               o.push("" + newidInside);
+//               return true;
+//             }
+//           }
+//           newidInside = id + 11;
+//           if (getBoxH1(id + 11 * 2).text() === xORo) {
+//             if (getBoxH1(newidInside).text() === "" && getBoxH1(newidInside).length !== 0) {
+//               getBoxH1(newidInside).text("O");
+//               o.push("" + newidInside);
+//               return true;
+//             }
+//           }
+//           newidInside = id - 11;
+//           if (getBoxH1(id - 11 * 2).text() === xORo) {
+//             if (getBoxH1(newidInside).text() === "" && getBoxH1(newidInside).length !== 0) {
+//               getBoxH1(newidInside).text("O");
+//               o.push("" + newidInside);
+//               return true;
+//             }
+//           }
+//           newidInside = id + 9;
+//           if (getBoxH1(id + 9 * 2).text() === xORo) {
+//             if (getBoxH1(newidInside).text() === "" && getBoxH1(newidInside).length !== 0) {
+//               getBoxH1(newidInside).text("O");
+//               o.push("" + newidInside);
+//               return true;
+//             }
+//           }
+//           newidInside = id - 9;
+//           if (getBoxH1(id - 9 * 2).text() === xORo) {
+//             if (getBoxH1(newidInside).text() === "" && getBoxH1(newidInside).length !== 0) {
+//               getBoxH1(newidInside).text("O");
+//               o.push("" + newidInside);
+//               return true;
+//             }
+//           }
+//           return false;
+          
+        
+//       }
+//     }
+//     return false;
+//   }
+// }
   function partOfPlayRandom(id, num) {
     var newId = id - num;
     if (getBoxH1(newId).length != 0 && getBoxH1(newId).text() === "X") {
@@ -362,9 +423,10 @@ $("document").ready(function() {
   function cl(text) {
     console.log(text);
   }
-  function showMessage(text) {
+  function showMessage(title,text,type) {
     window.setTimeout(function() {
-      alert(text);
+      swal(title, text, type);
+      // alert(text);
       restartGame();
     }, 50);
   }
