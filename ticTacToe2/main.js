@@ -1,4 +1,39 @@
+var playPlaces = [11, 12, 13, 21, 22, 23, 31, 32, 33];
+var generatedResult = [];
+var generatedResultPart = [];
+var seqNone = 0;
+var xWixSeq = [];
+var breaked = true;
+var playsCount = 0;
+
+function generatePosiblePlays() {
+  // generatedResultPart.clear()
+  // debugger;
+  for (var g1 of playPlaces) {
+    for (var g2 of playPlaces) {
+      if (g1 === g2) continue;
+      for (var g3 of playPlaces) {
+        if (g1 === g3 || g2 === g3) continue;
+        for (var g4 of playPlaces) {
+          if (g1 === g4 || g2 === g4 || g3 === g4) continue;
+          for (var g5 of playPlaces) {
+            if (g1 === g5 || g2 === g5 || g3 === g5 || g4 === g5) continue;
+            generatedResultPart = [];
+            generatedResultPart.push(g1);
+            generatedResultPart.push(g2);
+            generatedResultPart.push(g3);
+            generatedResultPart.push(g4);
+            generatedResultPart.push(g5);
+            generatedResult.push(generatedResultPart);
+          }
+        }
+      }
+    }
+  }
+  console.log("generatedResult Count = " + generatedResult.length);
+}
 $("document").ready(function() {
+  generatePosiblePlays();
   // console.log('test');
   var lastEnter = "O";
   var x = [];
@@ -8,34 +43,53 @@ $("document").ready(function() {
   var oCounter = 0;
   var gameType = 1;
   var gameDone = false;
+  var xWinArr = [];
+  for (var f1 of generatedResult) {
+    breaked = true;
+    xWinArr = [];
 
-  $(".box").on("click", function() {
+    for (var f2 of f1) {
+      if (!mainPlay(f2)) {
+        restartGame();
+        // breaked=true;
+        break;
+      }
+    }
+    playsCount++;
+
+    if (!breaked) xWixSeq.push(xWinArr);
+  }
+  console.log("plays count = " + playsCount);
+
+  function mainPlay(theID) {
     if (
-      $(this)
+      $("#box" + theID)
         .find("h1")
         .text() != ""
     ) {
-      return;
+      seqNone++;
+      return false;
     }
-    // debugger;
-
+    xWinArr.push(theID);
     // if (x.length === 0 && o.length === 0) {
     gameDone = false;
     // }
     if (lastEnter === "O") {
-      $(this)
+      $("#box" + theID)
         .find("h1")
         .text("X");
-      x.push($(this)[0].id[3] + "" + $(this)[0].id[4]);
+      x.push($("#box" + theID)[0].id[3] + "" + $("#box" + theID)[0].id[4]);
       lastEnter = "X";
       if (checkIfWin(x)) {
         xCounter++;
-        showMessage("Good job!", "x Win`s, game will restarted", "success");
+        showMessage();
         $("#xWins").text(xCounter);
         gameDone = true;
         if (gameType === 1) {
           lastEnter = "O";
         }
+        breaked = false;
+        return false;
       } else {
         if (gameType === 1) {
           if (!(isGameFull() || gameDone)) {
@@ -43,33 +97,27 @@ $("document").ready(function() {
             if (checkIfWin(o)) {
               gameDone = true;
               oCounter++;
-              showMessage("oops!!", "o Win`s, game will restarted", "error");
+              showMessage();
               $("#oWins").text(oCounter);
+              lastEnter = "O";
+              // breaked = true;
+              return false;
             }
             lastEnter = "O";
           }
         }
       }
-    } else {
-      $(this)
-        .find("h1")
-        .text("O");
-      o.push($(this)[0].id[3] + "" + $(this)[0].id[4]);
-      lastEnter = "O";
-      if (checkIfWin(o)) {
-        gameDone = true;
-        oCounter++;
-        showMessage("Good job!", "o Win`s, game will restarted", "success");
-        $("#oWins").text(oCounter);
-      }
     }
+
     if (isGameFull() && !gameDone) {
-      showMessage("Try Agin", "no one win, game will restarted", "info");
+      showMessage();
       if (gameType === 1) {
         lastEnter = "O";
       }
+      return false;
     }
-  });
+    return true;
+  }
 
   function partOfPlay4For(id, Num, xORo) {
     newidInside = id + Num;
@@ -132,6 +180,14 @@ $("document").ready(function() {
         play5SemiRandom();
       }
     } else {
+
+      // 0: (5)[11, 23, 32, 31, 21]
+      // 1: (5)[12, 31, 23, 13, 33]
+      // 2: (5)[13, 21, 32, 33, 23]
+      // 3: (5)[21, 13, 32, 33, 23]
+      // 4: (5)[23, 11, 32, 31, 21]
+      // 5: (5)[31, 12, 23, 13, 33]
+
       // 12,31,23 ==>13
       if (x.length == 2 && x[0] == 11 && x[1] == 23) {
         getBoxH1(13).text("O");
@@ -160,7 +216,6 @@ $("document").ready(function() {
         getBoxH1(13).text("O");
         o.push("" + 13);
       } else {
-        // debugger;
         if (!playSmartFor("O")) {
           if (!playSuperSmartFor("O")) {
             if (!playSmartFor("X")) {
@@ -239,6 +294,29 @@ $("document").ready(function() {
   function getBoxH1(id) {
     return $("#box" + id + " h1");
   }
+
+  // function playOn(id, char) {
+  //   if (char === "O") {
+  //     // if (
+  //     //   computerPlay === 1 &&
+  //     //   x.length === 2 &&
+  //     //   (id != 11 || id != 13 || id != 31 || id != 33)
+  //     // ) {
+  //     //   return false;
+  //     // } else {
+  //       getBoxH1(id).text("O");
+  //       o.push(id);
+  //       return true;
+  //     // }
+  //   } else if (char === "X") {
+  //     getBoxH1(id).text("X");
+  //     x.push(id);
+  //     return true;
+  //   } else {
+  //     console.log("error in playOn function char != (O||X)");
+  //     return false;
+  //   }
+  // }
 
   function partOfPlaySmartFor(id, Num, xORo) {
     var newidInside = id + Num * 2;
@@ -365,12 +443,8 @@ $("document").ready(function() {
   function cl(text) {
     console.log(text);
   }
-  function showMessage(title, text, type) {
-    window.setTimeout(function() {
-      swal(title, text, type);
-      // alert(text);
-      restartGame();
-    }, 50);
+  function showMessage() {
+    restartGame();
   }
 
   function checkIfWin(input) {

@@ -30,7 +30,7 @@ $("document").ready(function() {
       lastEnter = "X";
       if (checkIfWin(x)) {
         xCounter++;
-        showMessage("Good job!", "x Win`s, game will restarted", "success");
+        showMessage("Good job!","x Win`s, game will restarted", "success");
         $("#xWins").text(xCounter);
         gameDone = true;
         if (gameType === 1) {
@@ -59,12 +59,12 @@ $("document").ready(function() {
       if (checkIfWin(o)) {
         gameDone = true;
         oCounter++;
-        showMessage("Good job!", "o Win`s, game will restarted", "success");
+        showMessage("Good job!","o Win`s, game will restarted", "success");
         $("#oWins").text(oCounter);
       }
     }
     if (isGameFull() && !gameDone) {
-      showMessage("Try Agin", "no one win, game will restarted", "info");
+      showMessage("Try Agin", "no one win, game will restarted",'info');
       if (gameType === 1) {
         lastEnter = "O";
       }
@@ -189,6 +189,7 @@ $("document").ready(function() {
         getBoxH1(33).text() === "X" ||
         getBoxH1(13).text() === "X")
     ) {
+      
       if (getBoxH1(12).text() === "" && getBoxH1(32).text() !== "X") {
         getBoxH1(12).text("O");
         o.push("" + 12);
@@ -206,31 +207,34 @@ $("document").ready(function() {
         o.push("" + 23);
         return true;
       }
-    } else {
-      if (o.length === 1) {
+    }
+    else{
+      if (o.length === 1 ){
         if (partPlayForSecondPlay(32, 23)) {
-          getBoxH1(33).text("O");
-          o.push("" + 33);
+          getBoxH1(33).text('O');
+          o.push('' + 33);
           return true;
         } else if (partPlayForSecondPlay(23, 12)) {
-          getBoxH1(13).text("O");
-          o.push("" + 13);
+          getBoxH1(13).text('O');
+          o.push('' + 13);
           return true;
         } else if (partPlayForSecondPlay(12, 21)) {
-          getBoxH1(11).text("O");
-          o.push("" + 11);
+          getBoxH1(11).text('O');
+          o.push('' + 11);
           return true;
         } else if (partPlayForSecondPlay(21, 32)) {
-          getBoxH1(31).text("O");
-          o.push("" + 31);
+          getBoxH1(31).text('O');
+          o.push('' + 31);
           return true;
-        }
+        } 
       }
     }
     return false;
   }
-  function partPlayForSecondPlay(num1, num2) {
-    if (getBoxH1Text(num1) === "X" && getBoxH1Text(num2) === "X") return true;
+  function partPlayForSecondPlay(num1,num2)
+  {
+    if(getBoxH1Text(num1)==='X'&&getBoxH1Text(num2)==='X')
+    return true;
   }
   function getBoxH1Text(id) {
     return $("#box" + id + " h1").text();
@@ -365,7 +369,7 @@ $("document").ready(function() {
   function cl(text) {
     console.log(text);
   }
-  function showMessage(title, text, type) {
+  function showMessage(title,text,type) {
     window.setTimeout(function() {
       swal(title, text, type);
       // alert(text);
