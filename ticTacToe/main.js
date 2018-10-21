@@ -31,7 +31,7 @@ $("document").ready(function() {
       if (checkIfWin(x)) {
         xCounter++;
         showMessage("Good job!", "x Win`s, game will restarted", "success");
-        $("#xWins").text(xCounter);
+        $("#xWins").text(xCounter + '  ' + x);
         gameDone = true;
         if (gameType === 1) {
           lastEnter = "O";
