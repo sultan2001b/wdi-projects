@@ -1,0 +1,53 @@
+<table class="striped ">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Car Name</th>
+              <th>Car Plate</th>
+              <th>Entery Time</th>
+              <th>Fixed</th>
+              <th>Fix Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td> <%=  @customer.name  %></td>
+            <td> <%=  @customer.mobile %> </td>
+            <td> <%=  @customer.car_name %> </td>
+            <td> <%=  @customer.car_plate %> </td>
+            <td> <%=  @customer.entery_date_time %> </td>
+            <td> <%=  @customer.fixed %> </td>
+            <td> <%=  @customer.fixed_date_time %> </td>
+          </tr>
+        </tbody>
+      </table>
+
+car issues:
+<% if @customer.issues.length == 0%>
+<br> there are no issues added yet
+<% end %>
+<ul>
+<% @customer.issues.each do |issue| %>
+<li>
+<%= issue.name %> <br>
+
+
+<ul>
+<% issue.fixes.each do |fix| %>
+<li>
+<%=  fix.name+" - "+fix.part_cost.to_s+" - "+fix.hand_cost.to_s %> <br>
+ <%= link_to "edit", edit_fix_path(fix)%>
+  <%= link_to("Delete", fix_path(fix), method: :delete ,data: { confirm: 'Are you sure?' }) %>
+</li>
+<% end %>
+</ul>
+</li>
+<% @fix = Fix.new %>
+<% @issue_id = issue.id %>
+<%= render partial: 'fixes/form',object: @fix %>
+<% end %>
+</ul>
+<%= render partial: 'issues/form',object: @customer_id = @customer.id %>
+<% console %>

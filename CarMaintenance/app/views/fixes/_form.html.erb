@@ -1,0 +1,15 @@
+
+<%= form_for @fix do |f| %>
+<p>
+<%= f.label :name, "fix name: " %>
+<%= f.text_field :name %>
+<%= f.label :part_cost %>
+<%= f.text_field :part_cost, value: 0 %>
+<%= f.label :hand_cost %>
+<%= f.text_field :hand_cost, value: 0 %>
+    <%= f.submit %>
+</p>
+<%= hidden_field_tag "fix[issue_id]", @issue_id %>
+<%# <p>
+</p> %>
+<% end %>

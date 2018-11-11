@@ -1,0 +1,25 @@
+
+
+ <table class="striped ">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Car Name</th>
+              <th>Car Plate</th>
+              <th>Entery Time</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @customers.each do |cust| %>
+          <tr>
+            <td><%= link_to cust.name , customer_path(cust) %></td>
+            <td> <%=  cust.mobile %> </td>
+            <td> <%=  cust.car_name %> </td>
+            <td> <%=  cust.car_plate %> </td>
+            <td> <%=  cust.entery_date_time %> </td>
+          </tr>
+<% end %>
+        </tbody>
+      </table>

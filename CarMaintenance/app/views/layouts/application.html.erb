@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CarMaintenance</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <div class="row">
+
+      <div class="col s1 z-depth-3">
+        <!-- Grey navigation panel -->
+  <%= link_to "customers", customers_path %>
+
+      </div>
+
+      <div class="col s9">
+        <!-- Teal page content  -->
+        <div class="container">
+        <!-- Page Content goes here -->
+    <%= yield %>
+      </div>
+      </div>
+
+    </div>
+   
+          
+  
+  </body>
+</html>

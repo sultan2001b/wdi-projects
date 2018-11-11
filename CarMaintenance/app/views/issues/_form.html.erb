@@ -1,0 +1,12 @@
+
+
+<%= form_for @issue do |f| %>
+<p>
+<%= f.label :name, "issue name: " %>
+<%= f.text_field :name %>
+    <%= f.submit %>
+</p>
+<%= hidden_field_tag "issue[customer_id]", @customer_id%>
+<%# <p>
+</p> %>
+<% end %>
