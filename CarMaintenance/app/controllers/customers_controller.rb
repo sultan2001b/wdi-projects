@@ -1,15 +1,37 @@
 class CustomersController < ApplicationController
-  def index
-    @customers = Customer.where(fixed: false)
-  end
+  before_action :set_customer, only: [:show, :edit, :card]
 
+  def index
+    # @customers = case params[:status]
+    #              when "fixed" then Customer.where(fixed: true).order(:id)
+    #              when "broken" then Customer.where(fixed: false).order(:id)
+    #              else
+    #                Customer.all
+    #              end
+    if params[:search] == nil ||  params[:search] == ""
+ if params[:fixed] == "true"
+        @customers = Customer.where(fixed: true)
+      else
+        @customers = Customer.where(fixed: false)
+      end
+    else
+     if params[:fixed] == "true"
+        @customers = Customer.where(fixed: true, id: params[:search])
+      else
+        @customers = Customer.where(fixed: false, id: params[:search])
+      end
+    end
+  end
+  
   def show
-    @customer = Customer.find_by(id: params[:id])
+    @issues = @customer.issues
     @issue = Issue.new
   end
 
   def edit
-    @customer = Customer.find_by(id: params[:id])
+  end
+
+  def card
   end
 
   def update
@@ -27,8 +49,31 @@ class CustomersController < ApplicationController
     @customer = Customer.new
   end
 
+  def done
+    customer = Customer.find_by(id: params[:id])
+    if params[:return_undone] != "true"
+      customer.fixed = true
+      customer.fixed_date_time = DateTime.now
+    else
+      customer.fixed = false
+      customer.fixed_date_time = nil
+    end
+    customer.save
+    redirect_to request.referer
+  end
+
+  def set_customer
+    @customer = Customer.find_by(id: params[:id])
+  end
+
+  private
+
   def customer_params
-    params.require(:customer).permit(:name, :mobile, :car_name, :car_plate, :fixed, :fixed_date_time)
+    params.require(:customer).permit(:name, :mobile, :car_name, :car_plate, :fixed, :fixed_date_time, :entery_date_time)
+  end
+
+  def customer_params2
+    params.require(:customer).permit(:id)
   end
 
   # t.string "customer_name"

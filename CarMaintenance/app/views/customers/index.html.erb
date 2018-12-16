@@ -1,24 +1,34 @@
 
 
- <table class="striped ">
+ <table class="striped " id="table_id">
         <thead>
           <tr>
+              <th>ID</th>
               <th>Name</th>
               <th>Mobile</th>
               <th>Car Name</th>
               <th>Car Plate</th>
               <th>Entery Time</th>
+              <th>Action</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @customers.each do |cust| %>
+          <% @customers.order(:name).each do |cust| %>
           <tr>
+            <td><%= link_to cust.id , customer_path(cust) %></td>
             <td><%= link_to cust.name , customer_path(cust) %></td>
             <td> <%=  cust.mobile %> </td>
             <td> <%=  cust.car_name %> </td>
             <td> <%=  cust.car_plate %> </td>
-            <td> <%=  cust.entery_date_time %> </td>
+            <td> <%=  distance_of_time_in_words(cust.entery_date_time,DateTime.now) %> </td>
+            <td> 
+<% if params[:fixed] != "true" %>
+            <%=  link_to "Edit", edit_customer_path(cust) %> </td>
+<% else %>
+  <%= link_to "UnDone It", done_customer_path(cust,:return_undone => "true"),data: { confirm: 'Are you sure?' } %>
+
+            <% end %>
           </tr>
 <% end %>
         </tbody>

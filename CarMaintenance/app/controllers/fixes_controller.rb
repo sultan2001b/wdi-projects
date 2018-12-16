@@ -5,8 +5,8 @@ class FixesController < ApplicationController
 
   def update
     fix = Fix.find_by(id: params[:id])
-    fix.update(fix_params_for_update)
-     redirect_to customer_path fix.issue.customer.id
+    fix.update(fix_params)
+    redirect_to customer_path fix.issue.customer.id
   end
 
   def create
@@ -25,12 +25,18 @@ class FixesController < ApplicationController
   end
 
   private
+
   def fix_params
-    params.require(:fix).permit(:name, :part_cost, :hand_cost, :issue_id)
+    if params[:id]
+      params.require(:fix).permit(:name, :part_cost, :hand_cost)
+    else
+      params.require(:fix).permit(:name, :part_cost, :hand_cost, :issue_id)
+    end
   end
-  def fix_params_for_update
-    params.require(:fix).permit(:name, :part_cost, :hand_cost)
-  end
+
+  # def fix_params_for_update
+  #   params.require(:fix).permit(:name, :part_cost, :hand_cost)
+  # end
 
   #  t.string "part_name"
   #     t.integer "part_cost"

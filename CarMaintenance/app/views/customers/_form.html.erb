@@ -16,6 +16,15 @@
 <%= f.text_field :car_plate %>
 </p>
 <p>
+<%= f.label :entery_date_time %><br>
+<% if @customer.id.nil? %>
+<%= f.datetime_field :entery_date_time, value: DateTime.now.strftime('%Y-%m-%dT%H:%M') %>
+<% else %>
+<%= f.datetime_field :entery_date_time %>
+<% end %>
+</p>
+
+<p>
     <%= f.submit %>
 </p>
 <% end %>

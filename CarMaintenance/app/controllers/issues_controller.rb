@@ -6,7 +6,7 @@ class IssuesController < ApplicationController
   def update
     issue = Issue.find_by(id: params[:id])
     issue.update(issue_params2)
-     redirect_to customer_path issue.customer
+    redirect_to customer_path issue.customer
   end
 
   def create
@@ -19,13 +19,17 @@ class IssuesController < ApplicationController
   def new
     @issue = Issue.new
   end
-def destroy
-     Issue.destroy(params[:id])
-    redirect_to request.referer
 
+  def destroy
+    Issue.destroy(params[:id])
+    redirect_to request.referer
+  end
+
+  def index
   end
 
   private
+
   def issue_params
     params.require(:issue).permit(:name, :customer_id)
   end

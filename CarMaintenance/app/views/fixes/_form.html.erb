@@ -1,15 +1,29 @@
 
-<%= form_for @fix do |f| %>
-<p>
-<%= f.label :name, "fix name: " %>
-<%= f.text_field :name %>
-<%= f.label :part_cost %>
-<%= f.text_field :part_cost, value: 0 %>
-<%= f.label :hand_cost %>
-<%= f.text_field :hand_cost, value: 0 %>
-    <%= f.submit %>
-</p>
-<%= hidden_field_tag "fix[issue_id]", @issue_id %>
-<%# <p>
-</p> %>
-<% end %>
+        <%= form_for @fix  do |f| %>
+        <p>
+                <div class="form-row">
+                        <div class="col-md-3 mb-1">
+                                <%= f.label :name, "Fix name: " %>
+                                <%= f.text_field :name %>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                                <%= f.label :part_cost %>
+                                <% if @fix.id != nil %>
+                                <%= f.text_field :part_cost %>
+                                <% else %>
+                                <%= f.text_field :part_cost, value: 0 %>
+                                <% end %>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                                <%= f.label :hand_cost %>
+                                <% if @fix.id != nil %>
+                                        <%= f.text_field :hand_cost %>
+                                <% else %>
+                                        <%= f.text_field :hand_cost, value: 0 %>
+                                <% end %>
+                        </div>
+                </div>
+                <%= f.submit %>
+        </p>
+        <%= hidden_field_tag "fix[issue_id]", @issue_id %>
+        <% end %>
