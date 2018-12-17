@@ -59,6 +59,13 @@ app.get("/login", (req, res) => {
 app.get("/sign_up", (req, res) => {
   res.render("login/sign_up");
 });
+app.post("/sign_up", function(req, res) {
+  const { name, username, password, mobile } = req.body;
+  debugger;
+  db.User.create({ login_name: name, full_name: username, password, mobile }).then(function(user) {
+    res.redirect(`/login`);
+  });
+});
 // app.get("/login", (req, res) => {
 //     res.send("GET request to /home");
 // });
