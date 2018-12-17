@@ -17,13 +17,12 @@
 
 }
 
-<<<<<<< HEAD
 .signup{
     border: black 1px solid;
     width: 300px;
     height: 230px;
     margin: 150px auto 0 auto;
-=======
+}
 .container{
     margin-top: 20px;
     display: flex;
@@ -45,5 +44,4 @@ th{
 }
 td{
     padding-right: 20px;
->>>>>>> 0fbad701999da191373b00b62f90c70e611810a6
 }
