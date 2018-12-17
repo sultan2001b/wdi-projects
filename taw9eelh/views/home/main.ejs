@@ -9,10 +9,49 @@
   </head>
   <body>
     <div class="header">
-      <a href="login">login</a> <a href="sign_up">sign_up</a>
+      <div><a href="../login">login</a> <a href="../sign_up">sign_up</a></div>
+      <div class="insert">
+        <form action="/addRequest" method="post">
+          <label for="from">from:</label>
+          <input type="text" name="from" id="from" />
+
+          <label for="to">to:</label> <input type="text" name="to" id="to" />
+
+          <label for="date">date:</label>
+          <input type="text" name="date" id="date" />
+
+          <label for="reqType">request type:</label>
+          <input type="text" name="reqType" id="reqType" />
+
+<input type="hidden" id="userId" name="userId" value="<%= user.id %>">
+
+
+          <button type="submit">submit</button>
+        </form>
+      </div>
     </div>
     <div class="container">
       <div class="provider">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Date</th>
+            <th>Mobile</th>
+          </tr>
+          <% for(let request of requests){ %>
+          <tr>
+            <td><%= user.full_name %></td>
+            <td><%= request.from %></td>
+            <td><%= request.to %></td>
+            <td><%= request.date.toLocaleDateString('en-GB') %></td>
+            <td><%= user.mobile %></td>
+          </tr>
+          <% }%>
+        </table>
+      </div>
+      <div class="requester">
         <table>
           <tr>
             <th>Name</th>
@@ -28,108 +67,48 @@
             <td>2018/01/25</td>
             <td>0503142233</td>
           </tr>
-        <tr>
+          <tr>
             <td>mohammed yassin</td>
             <td>rawabi</td>
             <td>alfisal university</td>
             <td>2018/01/25</td>
             <td>0503149999</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>mosa ahmed</td>
             <td>sawidi</td>
             <td>alfisal university</td>
             <td>2018/01/25</td>
             <td>0503149999</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>sultan alsamaani</td>
             <td>rawabi</td>
             <td>alfisal university</td>
             <td>2018/01/25</td>
             <td>0503144433</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>sultan alsamaani</td>
             <td>alrabwah</td>
             <td>alfisal university</td>
             <td>2018/01/25</td>
             <td>0503142233</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>sultan alsamaani</td>
             <td>alrabwah</td>
             <td>alfisal university</td>
             <td>2018/01/25</td>
             <td>0503142233</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>sultan alsamaani</td>
             <td>alrabwah</td>
             <td>alfisal university</td>
             <td>2018/01/25</td>
             <td>0503142233</td>
-        </tr>
-        </table>
-      </div>
-      <div class="requester">
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Date</th>
-                <th>Mobile</th>
-            </tr>
-            <tr>
-                <td>sultan alsamaani</td>
-                <td>alrabwah</td>
-                <td>alfisal university</td>
-                <td>2018/01/25</td>
-                <td>0503142233</td>
-            </tr>
-            <tr>
-                <td>mohammed yassin</td>
-                <td>rawabi</td>
-                <td>alfisal university</td>
-                <td>2018/01/25</td>
-                <td>0503149999</td>
-            </tr>
-            <tr>
-                <td>mosa ahmed</td>
-                <td>sawidi</td>
-                <td>alfisal university</td>
-                <td>2018/01/25</td>
-                <td>0503149999</td>
-            </tr>
-            <tr>
-                <td>sultan alsamaani</td>
-                <td>rawabi</td>
-                <td>alfisal university</td>
-                <td>2018/01/25</td>
-                <td>0503144433</td>
-            </tr>
-            <tr>
-                <td>sultan alsamaani</td>
-                <td>alrabwah</td>
-                <td>alfisal university</td>
-                <td>2018/01/25</td>
-                <td>0503142233</td>
-            </tr>
-            <tr>
-                <td>sultan alsamaani</td>
-                <td>alrabwah</td>
-                <td>alfisal university</td>
-                <td>2018/01/25</td>
-                <td>0503142233</td>
-            </tr>
-            <tr>
-                <td>sultan alsamaani</td>
-                <td>alrabwah</td>
-                <td>alfisal university</td>
-                <td>2018/01/25</td>
-                <td>0503142233</td>
-            </tr>
+          </tr>
         </table>
       </div>
     </div>

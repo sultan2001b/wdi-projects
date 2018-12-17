@@ -3,9 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const request = sequelize.define(
     "request",
     {
-      start: DataTypes.STRING,
-      end: DataTypes.STRING,
-      by: DataTypes.STRING,
+      from: DataTypes.STRING,
+      to: DataTypes.STRING,
       type: DataTypes.STRING,
       date: DataTypes.DATE,
       userId: DataTypes.INTEGER
