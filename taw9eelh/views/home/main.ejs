@@ -40,7 +40,7 @@
             <th>Date</th>
             <th>Mobile</th>
           </tr>
-          <% for(let request of requests){ %>
+          <% for(let request of requestsP){ %>
           <tr>
             <td><%= user.full_name %></td>
             <td><%= request.from %></td>
@@ -60,55 +60,16 @@
             <th>Date</th>
             <th>Mobile</th>
           </tr>
-          <tr>
-            <td>sultan alsamaani</td>
-            <td>alrabwah</td>
-            <td>alfisal university</td>
-            <td>2018/01/25</td>
-            <td>0503142233</td>
-          </tr>
-          <tr>
-            <td>mohammed yassin</td>
-            <td>rawabi</td>
-            <td>alfisal university</td>
-            <td>2018/01/25</td>
-            <td>0503149999</td>
-          </tr>
-          <tr>
-            <td>mosa ahmed</td>
-            <td>sawidi</td>
-            <td>alfisal university</td>
-            <td>2018/01/25</td>
-            <td>0503149999</td>
-          </tr>
-          <tr>
-            <td>sultan alsamaani</td>
-            <td>rawabi</td>
-            <td>alfisal university</td>
-            <td>2018/01/25</td>
-            <td>0503144433</td>
-          </tr>
-          <tr>
-            <td>sultan alsamaani</td>
-            <td>alrabwah</td>
-            <td>alfisal university</td>
-            <td>2018/01/25</td>
-            <td>0503142233</td>
-          </tr>
-          <tr>
-            <td>sultan alsamaani</td>
-            <td>alrabwah</td>
-            <td>alfisal university</td>
-            <td>2018/01/25</td>
-            <td>0503142233</td>
-          </tr>
-          <tr>
-            <td>sultan alsamaani</td>
-            <td>alrabwah</td>
-            <td>alfisal university</td>
-            <td>2018/01/25</td>
-            <td>0503142233</td>
-          </tr>
+
+          <% for(let request of requestsR){ %>
+            <tr>
+              <td><%= user.full_name %></td>
+              <td><%= request.from %></td>
+              <td><%= request.to %></td>
+              <td><%= request.date.toLocaleDateString('en-GB') %></td>
+              <td><%= user.mobile %></td>
+            </tr>
+            <% }%>
         </table>
       </div>
     </div>
