@@ -68,7 +68,7 @@ app.post("/sign_up", function(req, res) {
 app.get("/login1", function(req, res) {
   const { username, password } = req.body;
   db.User.findAll({
-    wherer: {
+    where: {
       login_name: username
     }
   }).then(function(user) {
