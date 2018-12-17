@@ -1,10 +1,17 @@
 var express = require("express");
+const session = require("express-session");
+
 const path = require("path");
 
 var bodyParser = require("body-parser");
 const db = require("../models");
 
 const app = express();
+app.use(
+  session({
+    secret: "343ji43j4n3jn4jk3n"
+  })
+);
 const port = 3000;
 
 app.set("view engine", "ejs");
@@ -49,10 +56,16 @@ app.use(bodyParser.json());
 //     );
 // });
 app.get("/", (req, res) => {
-  res.render("home/main");
-  // res.send("GET request to /home");
-  // res.render("pages/dynamic", { name: req.params.name });
+  res.redirect("/login");
 });
+app.get("/main", (req, res) => {
+  // console.log(req.session.user);
+  db.request.findAll({ where: { type: "p" } }).then(function(requests) {
+    // res.send(requests);
+    res.render("home/main", { requests, user: req.session.user });
+  });
+});
+
 app.get("/login", (req, res) => {
   res.render("login/login");
 });
@@ -61,22 +74,45 @@ app.get("/sign_up", (req, res) => {
 });
 app.post("/sign_up", function(req, res) {
   const { name, username, password, mobile } = req.body;
-  db.User.create({ login_name: name, full_name: username, password, mobile }).then(function(user) {
-    res.redirect(`/login`);
+  db.User.create({
+    login_name: name,
+    full_name: username,
+    password,
+    mobile
+  }).then(function(user) {
+    res.render(`/login`);
   });
 });
-app.get("/login1", function(req, res) {
+app.post("/login", function(req, res) {
   const { username, password } = req.body;
   db.User.findAll({
     where: {
       login_name: username
     }
   }).then(function(user) {
-    if(user.password === password)
-    {
-    res.redirect(`/`);
+    if (user[0].password === password) {
+      req.session.user = user[0];
+      //  res.send(user[0]);
+      res.redirect("/main");
     }
   });
+});
+
+app.post("/addRequest", function(req, res) {
+  const { from, to, date, reqType, userId } = req.body;
+  db.request
+    .create({
+      from,
+      to,
+      type: reqType,
+      start: from,
+      date,
+      userId
+    })
+    .then(function(a) {
+      // res.send(req.body);
+      res.redirect("/main");
+    });
 });
 
 // app.get("/login", (req, res) => {
