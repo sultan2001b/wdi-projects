@@ -60,10 +60,12 @@ app.get("/", (req, res) => {
 });
 app.get("/main", (req, res) => {
   // console.log(req.session.user);
-  db.request.findAll({ where: { type: "p" } }).then(function(requests) {
+  db.request.findAll({ where: { type: "p" } }).then(function(requestsP) {
+    db.request.findAll({ where: { type: "r" } }).then(function(requestsR) {
     // res.send(requests);
-    res.render("home/main", { requests, user: req.session.user });
+    res.render("home/main", { requestsP,requestsR, user: req.session.user });
   });
+});
 });
 
 app.get("/login", (req, res) => {
@@ -80,10 +82,11 @@ app.post("/sign_up", function(req, res) {
     password,
     mobile
   }).then(function(user) {
-    res.render(`/login`);
+    res.redirect(`./login`);
   });
 });
 app.post("/login", function(req, res) {
+  // res.send(req.body);
   const { username, password } = req.body;
   db.User.findAll({
     where: {
@@ -92,7 +95,6 @@ app.post("/login", function(req, res) {
   }).then(function(user) {
     if (user[0].password === password) {
       req.session.user = user[0];
-      //  res.send(user[0]);
       res.redirect("/main");
     }
   });
