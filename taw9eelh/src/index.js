@@ -82,17 +82,19 @@ app.post("/sign_up", function(req, res) {
     password,
     mobile
   }).then(function(user) {
-    res.redirect(`./login`);
+    console.log(user.login_name);
+    res.redirect(`/login`);
   });
 });
 app.post("/login", function(req, res) {
   // res.send(req.body);
-  const { username, password } = req.body;
+  const { password } = req.body;
   db.User.findAll({
     where: {
-      login_name: username
+      login_name: req.body.username
     }
   }).then(function(user) {
+    console.log(user)
     if (user[0].password === password) {
       req.session.user = user[0];
       res.redirect("/main");
