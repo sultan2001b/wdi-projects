@@ -61,11 +61,24 @@ app.get("/sign_up", (req, res) => {
 });
 app.post("/sign_up", function(req, res) {
   const { name, username, password, mobile } = req.body;
-  debugger;
   db.User.create({ login_name: name, full_name: username, password, mobile }).then(function(user) {
     res.redirect(`/login`);
   });
 });
+app.get("/login1", function(req, res) {
+  const { username, password } = req.body;
+  db.User.findAll({
+    wherer: {
+      login_name: username
+    }
+  }).then(function(user) {
+    if(user.password === password)
+    {
+    res.redirect(`/`);
+    }
+  });
+});
+
 // app.get("/login", (req, res) => {
 //     res.send("GET request to /home");
 // });
