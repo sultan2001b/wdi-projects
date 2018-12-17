@@ -16,3 +16,26 @@
     margin-top: 10px;
 
 }
+
+.container{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.provider{
+    width: 49%;
+    height: 80vh;
+    border: black solid 2px;
+    margin-right: 10px;
+}
+.requester{
+    width: 49%;
+    height: 80vh;
+    border: black solid 2px;
+}
+th{
+    text-align: left;
+}
+td{
+    padding-right: 20px;
+}
