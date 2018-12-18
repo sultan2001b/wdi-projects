@@ -32,6 +32,7 @@ app.get("/request/:id/delete", (req, res) => {
     .findByPk(id)
     .then(request => request.destroy({ force: true }))
     .then(() => res.redirect("/main"));
+  var a = "";
 });
 
 // app.get("/users/:id/edit", (req, res) => {
