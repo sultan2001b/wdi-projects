@@ -4,49 +4,81 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style.css" />
     <title>Document</title>
   </head>
   <body>
-    <div class="header">
-      <div class="center"> <a href="../login">login</a> <a href="../sign_up">sign_up</a></div>
-      <div class="insert">
-        <form action="/addRequest" method="post">
-          <label for="from">from:</label>
-          <input type="text" name="from" id="from" />
 
-          <label for="to">to:</label> <input type="text" name="to" id="to" />
-
-          <label for="date">date:</label>
-          <input type="text" name="date" id="date" />
-
-          <label for="reqType">request type:</label>
-          <input type="text" name="reqType" id="reqType" />
-
-<input type="hidden" id="userId" name="userId" value="<%= user.id %>">
-
-
-          <button type="submit">submit</button>
-        </form>
-      </div>
-    </div>
+      <div class="form">
+          <div class="insertData">
+      
+            <form action="/addRequest" method="post">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="for">From:</label>
+                    <input type="text" name="from" id="from"  class="form-control" placeholder="Destination" required>
+                  </div>
+      
+                  <div class="form-group col-md-6">
+                    <label for="to">To:</label>
+                    <input type="text" name="to" id="to" class="form-control" placeholder="Arrival" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="date">Date:</label>
+                  <input type="text" name="date" id="date" class="form-control" placeholder="Month / Day / Year" required>
+                </div>
+      
+                <label for="reqType">Request type: </label>
+                    <select name="reqType" id="reqType" required>
+                      <option value="">Choose request type</option>
+                      <option value="p" required>Provider</option>
+                      <option value="r" required>Requester</option>
+                    </select>
+      
+                <input
+                type="hidden"
+                id="userId"
+                name="userId"
+                value="<%= user.id %>"
+              />
+                    <h1></h1>
+              <button class="btn btn-primary center" type="submit">submit</button>
+              </form>
+      
+            </div>
+          </div>
+    
     <div class="container">
       <div class="provider">
         <table>
           <tr>
+            <!-- <th>#</th> -->
             <th>Name</th>
             <th>From</th>
             <th>To</th>
             <th>Date</th>
             <th>Mobile</th>
+            <th>remove</th>
           </tr>
-          <% for(let request of requestsP){ %>
+          <% for(let resP1 of resP){ %>
           <tr>
-            <td><%= user.full_name %></td>
-            <td><%= request.from %></td>
-            <td><%= request.to %></td>
-            <td><%= request.date.toLocaleDateString('en-GB') %></td>
-            <td><%= user.mobile %></td>
+            <!-- <td><%= resP1.requestP.id %></td> -->
+            <td><%= resP1.user.full_name %></td>
+            <td><%= resP1.requestP.from %></td>
+            <td><%= resP1.requestP.to %></td>
+            <td><%= resP1.requestP.date.toLocaleDateString('en-GB') %></td>
+            <td><%= resP1.user.mobile %></td>
+            <td>
+              <% if(user.id === resP1.user.id ){ %>
+              <a href="./request/<%= resP1.requestP.id %>/delete">Remove</a>
+            
+              <% }%>
+            </td>
           </tr>
           <% }%>
         </table>
@@ -54,22 +86,31 @@
       <div class="requester">
         <table>
           <tr>
+            <!-- <th>#</th> -->
             <th>Name</th>
             <th>From</th>
             <th>To</th>
             <th>Date</th>
             <th>Mobile</th>
+            <th>remove</th>
           </tr>
 
-          <% for(let request of requestsR){ %>
-            <tr>
-              <td><%= user.full_name %></td>
-              <td><%= request.from %></td>
-              <td><%= request.to %></td>
-              <td><%= request.date.toLocaleDateString('en-GB') %></td>
-              <td><%= user.mobile %></td>
-            </tr>
-            <% }%>
+          <% for(let resR1 of resR){ %>
+          <tr>
+            <!-- <td><%= resR1.requestR.id %></td> -->
+            <td><%= resR1.user.full_name %></td>
+            <td><%= resR1.requestR.from %></td>
+            <td><%= resR1.requestR.to %></td>
+            <td><%= resR1.requestR.date.toLocaleDateString('en-GB') %></td>
+            <td><%= resR1.user.mobile %></td>
+            <td>
+              <% if(user.id === resR1.user.id ){ %>
+              <a href="./request/<%= resR1.requestR.id %>/delete">Remove</a>
+
+              <% }%>
+            </td>
+          </tr>
+          <% }%>
         </table>
       </div>
     </div>
