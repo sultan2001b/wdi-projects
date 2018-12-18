@@ -23,8 +23,12 @@
           <label for="reqType">request type:</label>
           <input type="text" name="reqType" id="reqType" />
 
-<input type="hidden" id="userId" name="userId" value="<%= user.id %>">
-
+          <input
+            type="hidden"
+            id="userId"
+            name="userId"
+            value="<%= user.id %>"
+          />
 
           <button type="submit">submit</button>
         </form>
@@ -39,6 +43,7 @@
             <th>To</th>
             <th>Date</th>
             <th>Mobile</th>
+            <th>remove</th>
           </tr>
           <% for(let resP1 of resP){ %>
           <tr>
@@ -47,6 +52,12 @@
             <td><%= resP1.requestP.to %></td>
             <td><%= resP1.requestP.date.toLocaleDateString('en-GB') %></td>
             <td><%= resP1.user.mobile %></td>
+            <td>
+              <% if(user.id === resP1.user.id ){ %>
+              <a href="./request/<%= resP1.requestP.id %>/delete">delete</a>
+            
+              <% }%>
+            </td>
           </tr>
           <% }%>
         </table>
@@ -59,27 +70,24 @@
             <th>To</th>
             <th>Date</th>
             <th>Mobile</th>
+            <th>remove</th>
           </tr>
 
           <% for(let resR1 of resR){ %>
-            <tr>
-              <td>
-                <%= resR1.user.full_name %>
-              </td>
-              <td>
-                <%= resR1.requestR.from %>
-              </td>
-              <td>
-                <%= resR1.requestR.to %>
-              </td>
-              <td>
-                <%= resR1.requestR.date.toLocaleDateString('en-GB') %>
-              </td>
-              <td>
-                <%= resR1.user.mobile %>
-              </td>
-            </tr>
-            <% }%>
+          <tr>
+            <td><%= resR1.user.full_name %></td>
+            <td><%= resR1.requestR.from %></td>
+            <td><%= resR1.requestR.to %></td>
+            <td><%= resR1.requestR.date.toLocaleDateString('en-GB') %></td>
+            <td><%= resR1.user.mobile %></td>
+            <td>
+              <% if(user.id === resR1.user.id ){ %>
+              <a href="./request/<%= resR1.requestR.id %>/delete">delete</a>
+
+              <% }%>
+            </td>
+          </tr>
+          <% }%>
         </table>
       </div>
     </div>

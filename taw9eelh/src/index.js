@@ -26,12 +26,13 @@ app.use(bodyParser.json());
 //         res.redirect(`/users/${u.id}`));
 // });
 
-// app.get("/users/:id/delete", (req, res) => {
-//     const id = parseInt(req.params.id, 10);
-//     db.User.findByPk(id)
-//         .then(user => user.destroy({ force: true }))
-//         .then(() => res.redirect("/users"));
-// });
+app.get("/request/:id/delete", (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  db.request
+    .findByPk(id)
+    .then(request => request.destroy({ force: true }))
+    .then(() => res.redirect("/main"));
+});
 
 // app.get("/users/:id/edit", (req, res) => {
 //     db.User.findByPk(parseInt(req.params.id, 10)).then(user =>
