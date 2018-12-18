@@ -40,13 +40,13 @@
             <th>Date</th>
             <th>Mobile</th>
           </tr>
-          <% for(let request of requestsP){ %>
+          <% for(let resP1 of resP){ %>
           <tr>
-            <td><%= user.full_name %></td>
-            <td><%= request.from %></td>
-            <td><%= request.to %></td>
-            <td><%= request.date.toLocaleDateString('en-GB') %></td>
-            <td><%= user.mobile %></td>
+            <td><%= resP1.user.full_name %></td>
+            <td><%= resP1.requestP.from %></td>
+            <td><%= resP1.requestP.to %></td>
+            <td><%= resP1.requestP.date.toLocaleDateString('en-GB') %></td>
+            <td><%= resP1.user.mobile %></td>
           </tr>
           <% }%>
         </table>
@@ -61,13 +61,23 @@
             <th>Mobile</th>
           </tr>
 
-          <% for(let request of requestsR){ %>
+          <% for(let resR1 of resR){ %>
             <tr>
-              <td><%= user.full_name %></td>
-              <td><%= request.from %></td>
-              <td><%= request.to %></td>
-              <td><%= request.date.toLocaleDateString('en-GB') %></td>
-              <td><%= user.mobile %></td>
+              <td>
+                <%= resR1.user.full_name %>
+              </td>
+              <td>
+                <%= resR1.requestR.from %>
+              </td>
+              <td>
+                <%= resR1.requestR.to %>
+              </td>
+              <td>
+                <%= resR1.requestR.date.toLocaleDateString('en-GB') %>
+              </td>
+              <td>
+                <%= resR1.user.mobile %>
+              </td>
             </tr>
             <% }%>
         </table>
