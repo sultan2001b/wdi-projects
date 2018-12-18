@@ -30,7 +30,7 @@
 }
 .provider{
     width: 49%;
-    height: 80vh;
+    height: 100%;
     border: black solid 2px;
     margin-right: 10px;
 }

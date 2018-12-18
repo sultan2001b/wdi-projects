@@ -80,7 +80,7 @@ app.get("/main", (req, res) => {
             }
           }
         }
-
+        var a = "";
         var resR = [];
         for (let requestR of requestsR) {
           for (let user of users) {
@@ -148,7 +148,6 @@ app.post("/addRequest", function(req, res) {
 // app.get("/login", (req, res) => {
 //     res.send("GET request to /home");
 // });
-
 
 // app.get("/about", (req, res) => {
 //     res.send("GET request to /about");
