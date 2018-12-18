@@ -1,4 +1,6 @@
 var express = require("express");
+var cors = require("cors");
+
 const session = require("express-session");
 
 const path = require("path");
@@ -7,6 +9,8 @@ var bodyParser = require("body-parser");
 const db = require("../models");
 
 const app = express();
+app.use(cors());
+
 app.use(
   session({
     secret: "343ji43j4n3jn4jk3n"
@@ -25,6 +29,10 @@ app.use(bodyParser.json());
 //     db.User.create({ firstName, lastName, email }).then(u =>
 //         res.redirect(`/users/${u.id}`));
 // });
+
+app.get("/json", (req, res) => {
+  res.json({ test: "TEST" });
+});
 
 app.get("/request/:id/delete", (req, res) => {
   const id = parseInt(req.params.id, 10);
@@ -63,13 +71,6 @@ app.get("/", (req, res) => {
   res.redirect("/login");
 });
 app.get("/main", (req, res) => {
-  // console.log(req.session.user);
-
-  //   db2.get("select r.*, u.full_name,u.mobile from requests r,Users u where r.userId = u.id and r.type='p'").then(function(requestsR) {
-  //     // res.send(requests);
-  //     res.render("home/main", { requestsP: requestsR, requestsR });
-  // });
-
   db.request.findAll({ where: { type: "p" } }).then(function(requestsP) {
     db.request.findAll({ where: { type: "r" } }).then(function(requestsR) {
       db.User.findAll().then(function(users) {
@@ -77,7 +78,10 @@ app.get("/main", (req, res) => {
         for (let requestP of requestsP) {
           for (let user of users) {
             if (requestP.userId === user.id) {
-              resP.push({ requestP, user });
+              resP.push({
+                requestP,
+                user
+              });
             }
           }
         }
@@ -86,15 +90,76 @@ app.get("/main", (req, res) => {
         for (let requestR of requestsR) {
           for (let user of users) {
             if (requestR.userId === user.id) {
-              resR.push({ requestR, user });
+              resR.push({
+                requestR,
+                user
+              });
             }
           }
         }
+        // console.log(req.session.user);
 
-        res.render("home/main", { resP, resR, user: req.session.user });
+        //   db2.get("select r.*, u.full_name,u.mobile from requests r,Users u where r.userId = u.id and r.type='p'").then(function(requestsR) {
+        //     // res.send(requests);
+        //     res.render("home/main", { requestsP: requestsR, requestsR });
+        // });
+
+        res.render("home/main", {
+          resP,
+          resR,
+          user: req.session.user
+        });
       });
     });
   });
+});
+
+app.get("/mainjson", (req, res) => {
+  db.request.findAll({ where: { type: "p" } }).then(function(requestsP) {
+    db.request.findAll({ where: { type: "r" } }).then(function(requestsR) {
+      db.User.findAll().then(function(users) {
+        var resP = [];
+        for (let requestP of requestsP) {
+          for (let user of users) {
+            if (requestP.userId === user.id) {
+              resP.push({
+                requestP,
+                user
+              });
+            }
+          }
+        }
+        var a = "";
+        var resR = [];
+        for (let requestR of requestsR) {
+          for (let user of users) {
+            if (requestR.userId === user.id) {
+              resR.push({
+                requestR,
+                user
+              });
+            }
+          }
+        }
+        // console.log(req.session.user);
+
+        //   db2.get("select r.*, u.full_name,u.mobile from requests r,Users u where r.userId = u.id and r.type='p'").then(function(requestsR) {
+        //     // res.send(requests);
+        //     res.render("home/main", { requestsP: requestsR, requestsR });
+        // });
+
+        res.json({
+          resP,
+          resR,
+          user: req.session.user
+        });
+      });
+    });
+  });
+});
+
+app.post("/test", (req, res) => {
+  res.json({ test: "lknlkn" });
 });
 
 app.get("/login", (req, res) => {
