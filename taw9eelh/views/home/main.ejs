@@ -35,18 +35,18 @@
                   <div class="form-group col-md-6">
                     <label for="for">From:</label>
                     <input type="text" name="from" id="from"  class="form-control" placeholder="Destination" required>
-                    <input type="checkbox" id="fromCheckbox"> Show Current Location</input>
+                    <!-- <input type="checkbox" id="fromCheckbox"> Show Current Location</input> -->
                   </div>
       
                   <div class="form-group col-md-6">
                     <label for="to">To:</label>
                     <input type="text" name="to" id="to" class="form-control" placeholder="Arrival" required>
-                    <input type="checkbox" id="toCheckbox"> Show Current Location</input>
+                    <!-- <input type="checkbox" id="toCheckbox"> Show Current Location</input> -->
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="date">Date:</label>
-                  <input type="date" name="date" id="date" class="form-control" placeholder="Month / Day / Year" required>
+                  <input type="text" name="date" id="date" class="form-control" placeholder="Month / Day / Year" required>
                 </div>
       
                 <label for="reqType">Request type: </label>
@@ -89,7 +89,11 @@
                     <td><%= resP1.user.full_name %></td>
                     <td><%= resP1.requestP.from %></td>
                     <td><%= resP1.requestP.to %></td>
+                    <% if (resP1.requestP.date) { %>
                     <td><%= resP1.requestP.date.toLocaleDateString('en-GB') %></td>
+                    <% } else { %>
+                      <td>No date</td>
+                      <% } %>
                     <td><%= resP1.user.mobile %></td>
                     <td>
                       <% if(user.id === resP1.user.id ){ %>
@@ -122,7 +126,11 @@
                   <td><%= resR1.user.full_name %></td>
                   <td><%= resR1.requestR.from %></td>
                   <td><%= resR1.requestR.to %></td>
+                  <% if (resR1.requestR.date) { %>
                   <td><%= resR1.requestR.date.toLocaleDateString('en-GB') %></td>
+                  <% } else { %>
+                    <td>No date</td>
+                    <% } %>
                   <td><%= resR1.user.mobile %></td>
                   <td>
                       <% if(user.id === resR1.user.id ){ %>
@@ -134,7 +142,6 @@
           </tbody>
       </table>
     </div>
-     
     </div>
     <script src="/main.js"></script>
     <script src="/bootstrap-datepicker.js"></script>
