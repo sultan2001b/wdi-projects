@@ -11,11 +11,11 @@ class Routes extends React.Component {
     render() {
         return <HashRouter>
             <div>
-              <nav>
+              {/* <nav>
                 <Link to="/">Login</Link>
                 <Link to="/Main">Main</Link>
                 <Link to="/SignUp">SignUp</Link>
-              </nav>
+              </nav> */}
 
               <Route exact path="/" component={Login} />
               <Route path="/Login" component={Login} />

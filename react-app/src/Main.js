@@ -39,6 +39,7 @@ class Main extends Component {
   }
   reqTypeChange(e) {
     this.setState({ reqType: e.target.value });
+    console.log(e.target.value);
   }
   
   handleSubmit(event) {
@@ -46,7 +47,7 @@ class Main extends Component {
     const userId = localStorage.getItem("id");
     
     this.setState({ userId: userId }, () => {
-      console.log(this.state);
+      // console.log(this.state);
       // console.log(this.state.to);
       // console.log(this.state.from);
       // console.log(this.state.date);
@@ -62,7 +63,9 @@ class Main extends Component {
       })
         .then(res => res.json())
         .then(response => {
+          // console.log("before");
           console.log(response);
+          // console.log("after");
           // this.setState({ data: JSON.stringify(response) });
           // localStorage.setItem("id", response.id);
           window.location.reload();
@@ -90,22 +93,11 @@ class Main extends Component {
     if (!test) {
       return <div />;
     } else {
-      // for (let a of test.resP) {
-      //     console.log(test.resP);
-      //     html += (
-      //         <tr>
-      //             <td>{a.user.full_name} </td>
-      //             <td>{a.user.full_name} </td>
-      //             <td>{a.user.full_name} </td>
-      //             <td>{a.user.full_name} </td>
-      //             <td>{a.user.full_name} </td>
-      //             <td>{a.user.full_name} </td>
-      //         </tr>
-      //     );
+      
 
       const addRequest = ( <div>
         <div className="logo">
-         <a  class="fas fa-home" href="/"></a>
+          <a cclassName="fas fa-home" href="/"></a>
          </div>
         <div className="form">
         <div className="insertData">
@@ -127,8 +119,8 @@ class Main extends Component {
                 <input name="date" id="date" className="form-control" placeholder="Month / Day / Year" onChange={this.dateChange} value={this.state.date}  required/>
               </div>
     
-              <label htmlFor="reqType" onChange={this.reqTypeChange} value={this.state.reqType}>Request type: </label>
-                  <select name="reqType" id="reqType" required>
+              <label htmlFor="reqType" >Request type: </label>
+              <select name="reqType" id="reqType" onChange={this.reqTypeChange} value={this.state.reqType} required>
                     <option value="">Choose request type</option>
                     <option value="p" required>Provider</option>
                     <option value="r" required>Requester</option>

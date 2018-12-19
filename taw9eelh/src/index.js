@@ -1,5 +1,3 @@
-
-
 var express = require("express");
 var cors = require("cors");
 
@@ -18,8 +16,6 @@ app.use(
     secret: "343ji43j4n3jn4jk3n"
   })
 );
-
-
 
 const port = 3000;
 
@@ -236,12 +232,12 @@ app.post("/addRequest", function(req, res) {
       userId
     })
     .then(function(a) {
-       res.redirect("/main");
+      res.redirect("/main");
     });
-    // res.send(req.body);
+  // res.send(req.body);
 });
 
-app.post("/addRequestjson", function (req, res) {
+app.post("/addRequestjson", function(req, res) {
   const { from, to, date, reqType, userId } = req.body;
   db.request
     .create({
@@ -253,7 +249,7 @@ app.post("/addRequestjson", function (req, res) {
     })
     .then(function (a) {
       // res.send(req.body);
-      res.json({from, to, date, reqType, userId,a});
+      res.json({from, to, date, reqType, userId,a,result:"done"});
     });
 });
 
