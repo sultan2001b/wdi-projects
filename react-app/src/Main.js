@@ -22,6 +22,8 @@ class Main extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
+  
   fromChange(e) {
     this.setState({ from: e.target.value });
   }
@@ -38,6 +40,7 @@ class Main extends Component {
   reqTypeChange(e) {
     this.setState({ reqType: e.target.value });
   }
+  
   handleSubmit(event) {
     event.preventDefault();
     const userId = localStorage.getItem("id");
@@ -82,6 +85,7 @@ class Main extends Component {
   }
 
   render() {
+    
     const test = JSON.parse(this.state.data);
     if (!test) {
       return <div />;
@@ -99,42 +103,44 @@ class Main extends Component {
       //         </tr>
       //     );
 
-      const addRequest = (
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="from">from:</label>
-          <input
-            type="text"
-            name="from"
-            id="from"
-            onChange={this.fromChange}
-            value={this.state.from}
-          />
-          <label htmlFor="to">to:</label>{" "}
-          <input
-            type="text"
-            name="to"
-            id="to"
-            onChange={this.toChange}
-            value={this.state.to}
-          />
-          <label htmlFor="date">date:</label>
-          <input
-            type="text"
-            name="date"
-            id="date"
-            onChange={this.dateChange}
-            value={this.state.date}
-          />
-          <label htmlFor="reqType">request type:</label>
-          <input
-            type="text"
-            name="reqType"
-            id="reqType"
-            onChange={this.reqTypeChange}
-            value={this.state.reqType}
-          />
-          <button type="submit">submit</button>
-        </form>
+      const addRequest = ( <div>
+        <div className="logo">
+         <a  class="fas fa-home" href="/"></a>
+         </div>
+        <div className="form">
+        <div className="insertData">
+    
+         <form onSubmit={this.handleSubmit}>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="for">From:</label>
+                  <input type="text" name="from" id="from"  className="form-control" placeholder="Destination" onChange={this.fromChange} value={this.state.from} required/>
+                </div>
+    
+                <div className="form-group col-md-6">
+                  <label htmlFor="to">To:</label>
+                  <input type="text" name="to" id="to" className="form-control" placeholder="Arrival" onChange={this.toChange} value={this.state.to} required/>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="date">Date:</label>
+                <input name="date" id="date" className="form-control" placeholder="Month / Day / Year" onChange={this.dateChange} value={this.state.date}  required/>
+              </div>
+    
+              <label htmlFor="reqType" onChange={this.reqTypeChange} value={this.state.reqType}>Request type: </label>
+                  <select name="reqType" id="reqType" required>
+                    <option value="">Choose request type</option>
+                    <option value="p" required>Provider</option>
+                    <option value="r" required>Requester</option>
+                  </select>
+    
+                  <h1></h1>
+            <button className="btn btn-primary center" type="submit">submit</button>
+            </form>
+    
+          </div>
+        </div>
+        </div>
       );
 
       const requestPHTML = test.resP.map(function(res) {
@@ -154,7 +160,6 @@ class Main extends Component {
           </tr>
         );
       });
-
 
       const requestRHTML = test.resR.map(function(res) {
         return (
@@ -178,8 +183,8 @@ class Main extends Component {
         <div>
           {addRequest}
           <div className="container">
-            <div class="provider">
-              <table>
+            <div className="provider">
+            <table id="table_id" className="display">
                 <tr>
                   <th>Name</th>
                   <th>From</th>
@@ -190,8 +195,8 @@ class Main extends Component {
                 {requestPHTML}
               </table>
             </div>
-            <div class="requester">
-              <table>
+            <div className="requester">
+            <table id="table_id" className="display">
                 <tr>
                   <th>Name</th>
                   <th>From</th>
