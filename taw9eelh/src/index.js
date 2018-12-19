@@ -171,14 +171,27 @@ app.get("/sign_up", (req, res) => {
 app.post("/sign_up", function(req, res) {
   const { name, username, password, mobile } = req.body;
   db.User.create({
-    login_name: name,
-    full_name: username,
+    login_name: username,
+    full_name: name,
     password,
     mobile
   }).then(function(user) {
     res.redirect(`/login`);
   });
 });
+
+app.post("/sign_upjson", function(req, res) {
+  const { name, username, password, mobile } = req.body;
+  db.User.create({
+    login_name: username,
+    full_name: name,
+    password,
+    mobile
+  }).then(function(user) {
+    res.json("successfull");
+  });
+});
+
 app.post("/login", function(req, res) {
   // res.send(req.body);
   const { password } = req.body;
@@ -193,6 +206,18 @@ app.post("/login", function(req, res) {
     }
   });
 });
+app.post("/loginjson", function(req, res) {
+  const { password } = req.body;
+  db.User.findAll({
+    where: {
+      login_name: req.body.username
+    }
+  }).then(function(user) {
+    if (user[0].password === password) {
+      res.json(user[0]);
+    }
+  });
+});
 
 app.post("/addRequest", function(req, res) {
   const { from, to, date, reqType, userId } = req.body;
@@ -201,13 +226,28 @@ app.post("/addRequest", function(req, res) {
       from,
       to,
       type: reqType,
-      start: from,
       date,
       userId
     })
     .then(function(a) {
       // res.send(req.body);
       res.redirect("/main");
+    });
+});
+
+app.post("/addRequestjson", function (req, res) {
+  const { from, to, date, reqType, userId } = req.body;
+  db.request
+    .create({
+      from,
+      to,
+      type: reqType,
+      date,
+      userId
+    })
+    .then(function (a) {
+      // res.send(req.body);
+      res.json({from, to, date, reqType, userId,a});
     });
 });
 
