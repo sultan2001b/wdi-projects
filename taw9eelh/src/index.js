@@ -226,19 +226,19 @@ app.post("/loginjson", function(req, res) {
 
 app.post("/addRequest", function(req, res) {
   const { from, to, date, reqType, userId } = req.body;
-  console.log(date, from);
-  // db.request
-  //   .create({
-  //     from,
-  //     to,
-  //     type: reqType,
-  //     date,
-  //     userId
-  //   })
-    // .then(function(a) {
-    //    res.redirect("/main");
-    // });
-    res.send(req.body);
+  // console.log(date, from);
+  db.request
+    .create({
+      from,
+      to,
+      type: reqType,
+      date,
+      userId
+    })
+    .then(function(a) {
+       res.redirect("/main");
+    });
+    // res.send(req.body);
 });
 
 app.post("/addRequestjson", function (req, res) {
