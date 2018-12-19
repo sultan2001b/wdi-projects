@@ -73,6 +73,7 @@ class SignUp extends Component {
     </div> 
     <div className="logo">
          <a  class="fas fa-home" href="/"></a>
+         <a  class="fas fa-user-plus" href="/sing_up"></a>
          </div>
     <div className="login">
     

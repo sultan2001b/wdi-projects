@@ -58,6 +58,10 @@ class Login extends Component {
         <div className="logo">
         <img src="/taw9eelh.png"/>
         </div> 
+        <div className="logo">
+         <a  class="fas fa-home" href="/"></a>
+         <a  class="fas fa-user-plus" href="/#/SignUp"></a>
+         </div>
         <div class="login">
         <form onSubmit={this.handleSubmit}>
             <div class="form-group">
