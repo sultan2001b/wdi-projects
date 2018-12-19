@@ -55,28 +55,27 @@ class Login extends Component {
     } else {
       return (
         <div>
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="username">username:</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              onChange={this.usernameChange}
-              value={this.state.username}
-            />
-
-            <label htmlFor="password">password:</label>
-            <input
-              type="text"
-              name="password"
-              id="password"
-              onChange={this.passwordChange}
-              value={this.state.password}
-            />
-
-            <input type="submit" value="login" />
+        <div className="logo">
+        <img src="/taw9eelh.png"/>
+        </div> 
+        <div className="logo">
+         <a  class="fas fa-home" href="/"></a>
+         <a  class="fas fa-user-plus" href="/#/SignUp"></a>
+         </div>
+        <div class="login">
+        <form onSubmit={this.handleSubmit}>
+            <div class="form-group">
+              <label htmlFor="username">Email address / Username</label>
+              <input type="text" class="form-control" name="username" id="username"  placeholder="Enter email or username" onChange={this.usernameChange}  value={this.state.username}/>
+            </div>
+            <div class="form-group">
+              <label htmlFor="password">Password</label>
+              <input type="text" class="form-control" name="password" id="password" placeholder="Password" onChange={this.passwordChange}  value={this.state.password}/>
+            </div>
+            <button type="submit" value="Login" class="btn btn-primary">Login</button>
           </form>
-        </div>
+          </div>
+          </div>
       );
     }
   }

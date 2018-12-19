@@ -1,3 +1,83 @@
+body {
+  padding: 1%;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.logo>a {
+  text-align: center;
+  color:black; 
+  font-size: 26px; 
+  padding: 1%;
+}
+.signup {
+  border: black 1px solid;
+  width: 300px;
+  height: 230px;
+  margin: 150px auto 0 auto;
+}
+
+.login{
+  /* border: black 1px solid; */
+  border: 1px black solid;
+  padding: 1%;
+  width: 300px;
+  height: 100%;
+  margin: 100px auto 0 auto;
+}
+
+.container{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.insertData {
+  display: flex;
+  justify-content: center;
+  padding: 1%;
+  border: 1px black solid;
+  width: 50%;
+}
+
+.provider {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border: black solid 2px;
+  margin-right: 10px;
+  padding: 1%;
+}
+
+.requester {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border: black solid 2px;
+  margin-right: 10px;
+  padding: 1%;
+}
+
+th {
+  border: black 1px solid;
+  text-align: center;
+  padding: 10px 40px;  
+}
+
+td {
+  border: black 1px solid;
+  text-align: center;
+  padding: 0px 10px;  
+}
+
 .App {
   text-align: center;
 }

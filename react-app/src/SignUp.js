@@ -67,29 +67,38 @@ class SignUp extends Component {
       if (this.state.data != null) {
           return <Redirect to="/Login" />;
       } else {
-    return <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="name"> name:</label>
-          <input type="text" name="name" id="name" onChange={this.nameChange} value={this.state.name} />
+    return (<div>
+      <div className="logo">
+    <img src="/taw9eelh.png"/>
+    </div> 
+    <div className="logo">
+         <a  class="fas fa-home" href="/"></a>
+         <a  class="fas fa-user-plus" href="/sing_up"></a>
+         </div>
+    <div className="login">
+    
+      <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+                    <label htmlFor="name">Full name</label>
+                    <input type="text" className="form-control" name="name" id="name" onChange={this.nameChange} value={this.state.name} required/>
+            </div>
+            <div className="form-group">
+                    <label htmlFor="password">Username</label>
+                    <input type="text" className="form-control" name="username" id="username" onChange={this.usernameChange} value={this.state.username} required/>
+            </div>
+            <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input type="text" name="password" id="password" className="form-control" onChange={this.passwordChange} value={this.state.password} required/>
+            </div>
+            <div className="form-group">
+                    <label htmlFor="password">Mobile</label>
+                    <input type="text" name="mobile" id="mobile"  className="form-control" onChange={this.mobileChange} value={this.state.mobile} required/>
+            </div>
+            <button type="submit" value="signup" className="btn btn-primary">Sign Up</button>
+          </form>
           </div>
-          <div>
-            <label htmlFor="username">username:</label>
-            <input type="text" name="username" id="username" onChange={this.usernameChange} value={this.state.username} />
-          </div>
-          <div>
-            <label htmlFor="password">password:</label>
-            <input type="text" name="password" id="password" onChange={this.passwordChange} value={this.state.password} />
-          </div>
-          <div>
-            <label htmlFor="mobile">mobile:</label>
-            <input type="text" name="mobile" id="mobile" onChange={this.mobileChange} value={this.state.mobile} />
-          </div>
-          <div>
-            <input type="submit" value="signup" />
-          </div>
-        </form>
-      </div>;
+    </div>
+    );
   }
   }
 }
