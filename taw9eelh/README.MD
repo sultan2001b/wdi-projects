@@ -30,6 +30,6 @@ Working as a group for the Fourth and Final project of the Web Development Immer
 ## Credit
 
 * Abdullah AlQahtani - [Abdullah-AlQahtani](https://github.com/Abdullah-AlQahtani)
-* Sultan Alsamaani - [Sultan2001b](https://github.com/sultan2001b)
 * Mansour AlSugayan - [Mansourms](https://github.com/mansourms)
+* Sultan Alsamaani - [Sultan2001b](https://github.com/sultan2001b)
 
